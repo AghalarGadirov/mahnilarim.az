@@ -2,110 +2,129 @@
 <html lang="az">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Panel – Qiymət Redaktə</title>
+  <title>💰 Qiymət Siyahısı – Admin Panel</title>
   <style>
     body {
-      background-color: #4A148C;
+      background-color: #6A1B9A;
       color: white;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    h1 {
+      font-family: "Segoe UI", Arial, sans-serif;
+      padding: 30px;
       text-align: center;
     }
-    .card {
-      background-color: #6A1B9A;
-      padding: 15px;
+    h1 {
+      margin-bottom: 20px;
+    }
+    .price-section {
+      background-color: #9932CC;
+      padding: 20px;
       border-radius: 10px;
-      margin-bottom: 15px;
+      max-width: 700px;
+      margin: 10px auto;
+      text-align: left;
     }
-    .card input {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0;
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: calc(100% - 30px);
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border-radius: 6px;
       border: none;
-      border-radius: 5px;
+      font-size: 1em;
     }
-    .card button {
-      margin-right: 10px;
-      background-color: #D81B60;
+    button {
+      background-color: #BA55D3;
       color: white;
-      padding: 6px 12px;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #9b3bb8;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .input-row input {
+      flex: 1;
+    }
+    .remove-btn {
+      margin-left: 10px;
+      background-color: #e53935;
       border: none;
       border-radius: 5px;
+      color: white;
+      padding: 6px 10px;
       cursor: pointer;
     }
-    #saveButton {
-      display: block;
-      margin: 20px auto;
-      background-color: #00C853;
+    .remove-btn:hover {
+      background-color: #c62828;
     }
   </style>
 </head>
 <body>
-  <h1>💰 Qiymət Redaktəsi</h1>
-  <div id="cards"></div>
 
-  <label for="endTime">⏳ Endirim Bitmə Vaxtı:</label>
-  <input type="datetime-local" id="endTime">
+  <h1>💰 Qiymət Siyahısı – Redaktə Paneli</h1>
 
-  <button id="saveButton" onclick="saveChanges()">Yadda saxla</button>
+  <div id="priceContainer"></div>
+
+  <button onclick="addPrice()">+ Yeni Qiymət Əlavə Et</button>
+  <br>
+  <button onclick="saveChanges()">💾 Yadda Saxla</button>
 
   <script>
-    const cardsContainer = document.getElementById("cards");
+    const data = [
+      { name: "Uşaq Mahnısı", oldPrice: "80 AZN", newPrice: "60 AZN" },
+      { name: "Sevgili Mahnısı", oldPrice: "75 AZN", newPrice: "55 AZN" },
+      { name: "Ata/Ana Mahnısı", oldPrice: "70 AZN", newPrice: "50 AZN" },
+      { name: "Video ilə birlikdə", oldPrice: "100 AZN", newPrice: "80 AZN" }
+    ];
 
-    fetch("https://mahnisifarisim-az.onrender.com/api/qiymet")
-      .then(res => res.json())
-      .then(data => {
-        data.items.forEach(item => {
-          const div = document.createElement("div");
-          div.className = "card";
-          div.innerHTML = `
-            <input class="title" placeholder="Başlıq" value="${item.title}">
-            <input class="oldPrice" placeholder="Əvvəlki Qiymət" value="${item.oldPrice}">
-            <input class="newPrice" placeholder="Endirimli Qiymət" value="${item.newPrice}">
-          `;
-          cardsContainer.appendChild(div);
-        });
-        document.getElementById("endTime").value = new Date(data.endTime).toISOString().slice(0,16);
+    function renderPrices() {
+      const container = document.getElementById("priceContainer");
+      container.innerHTML = "";
+      data.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "price-section";
+        div.innerHTML = `
+          <label>Kateqoriya Adı:</label>
+          <input type="text" value="${item.name}" onchange="data[${index}].name = this.value">
+          <label>Endirimdən Əvvəl:</label>
+          <input type="text" value="${item.oldPrice}" onchange="data[${index}].oldPrice = this.value">
+          <label>Endirimli Qiymət:</label>
+          <input type="text" value="${item.newPrice}" onchange="data[${index}].newPrice = this.value">
+          <button class="remove-btn" onclick="removePrice(${index})">Sil</button>
+        `;
+        container.appendChild(div);
       });
+    }
+
+    function addPrice() {
+      data.push({ name: "", oldPrice: "", newPrice: "" });
+      renderPrices();
+    }
+
+    function removePrice(index) {
+      data.splice(index, 1);
+      renderPrices();
+    }
 
     function saveChanges() {
-      const data = {
-        endTime: document.getElementById("endTime").value,
-        items: [...document.querySelectorAll(".card")].map(card => ({
-          title: card.querySelector(".title").value,
-          oldPrice: card.querySelector(".oldPrice").value,
-          newPrice: card.querySelector(".newPrice").value
-        }))
-      };
-
-      fetch("https://mahnisifarisim-az.onrender.com/api/qiymet", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(res => {
-        if (res.ok) showSavedMessage();
-        else throw new Error("Xəta baş verdi");
-      })
-      .catch(() => alert("❌ Xəta baş verdi"));
+      console.log("Yadda saxlanılan qiymətlər:", data);
+      alert("Dəyişikliklər saxlanıldı (demo versiya)");
     }
 
-    function showSavedMessage() {
-      const msg = document.createElement("div");
-      msg.innerText = "✅ Dəyişikliklər yadda saxlanıldı";
-      msg.style.position = "fixed";
-      msg.style.bottom = "30px";
-      msg.style.right = "30px";
-      msg.style.padding = "10px 20px";
-      msg.style.backgroundColor = "#4CAF50";
-      msg.style.color = "white";
-      msg.style.borderRadius = "8px";
-      msg.style.zIndex = "1000";
-      document.body.appendChild(msg);
-      setTimeout(() => msg.remove(), 3000);
-    }
+    renderPrices();
   </script>
+
 </body>
 </html>
