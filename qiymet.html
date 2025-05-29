@@ -1,20 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
   <meta charset="UTF-8">
   <title>Qiymət Siyahısı</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; color: #333; }
-    h1 { color: #6A1B9A; }
-    .block { border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; background: white; border-radius: 6px; }
-    .block h3 { margin: 0 0 5px; }
-    .block s { color: #999; }
-    .block strong { color: green; }
-  </style>
 </head>
 <body>
-
   <h1>💰 Qiymət Siyahısı</h1>
   <div id="qiymetler">Yüklənir...</div>
 
@@ -22,24 +12,21 @@
     fetch("https://mahnisifarisim-az.onrender.com/api/qiymet")
       .then(res => res.json())
       .then(data => {
-        const container = document.getElementById("qiymetler");
-        container.innerHTML = "";
+        const div = document.getElementById("qiymetler");
+        div.innerHTML = "";
         data.forEach(item => {
-          const block = document.createElement("div");
-          block.className = "block";
-          block.innerHTML = `
-            <h3>${item.basliq}</h3>
-            <p>Əvvəl: <s>${item.evvel}</s></p>
-            <p>İndi: <strong>${item.sonra}</strong></p>
+          const box = document.createElement("div");
+          box.innerHTML = `
+            <h3>${item.title}</h3>
+            <p><del>${item.oldPrice}</del> <strong>${item.newPrice}</strong></p>
           `;
-          container.appendChild(block);
+          div.appendChild(box);
         });
       })
       .catch(err => {
+        console.error("Fetch Error:", err);
         document.getElementById("qiymetler").innerText = "Xəta baş verdi!";
-        console.error(err);
       });
   </script>
-
 </body>
 </html>
