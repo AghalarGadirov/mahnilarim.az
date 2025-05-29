@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>📞 Bizimlə Əlaqə – Admin Redaktə</title>
+  <style>
+    body {
+      background-color: #6A1B9A;
+      color: white;
+      font-family: "Segoe UI", Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 30px 10px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .section {
+      background-color: #9932CC;
+      padding: 20px;
+      margin: 10px auto;
+      border-radius: 10px;
+      max-width: 700px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1em;
+    }
+    button {
+      background-color: #BA55D3;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #9b3bb8;
+    }
+    .group {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📞 Bizimlə Əlaqə – Redaktə Paneli</h1>
+
+  <div class="section">
+    <div class="group">
+      <label for="map">📍 Google Maps Linki:</label>
+      <input type="text" id="map" value="https://maps.app.goo.gl/iWmmMVHKLjuiAZ9e8">
+    </div>
+
+    <div class="group">
+      <label for="address">📍 Ünvan Yazısı:</label>
+      <textarea id="address" rows="2">Bakı şəhəri, Nizami küç. 123A</textarea>
+    </div>
+
+    <div class="group">
+      <label>📞 Əlaqə Nömrələri:</label>
+      <div id="phones">
+        <input type="text" value="+994 50 303 58 47">
+        <input type="text" value="+994 51 437 41 21">
+        <input type="text" value="+994 50 714 24 03">
+      </div>
+      <button onclick="addInput('phones')">+ Yeni Nömrə Əlavə Et</button>
+    </div>
+
+    <div class="group">
+      <label>📧 E-mail ünvanları:</label>
+      <div id="emails">
+        <input type="email" value="sifarismahni@gmail.com">
+      </div>
+      <button onclick="addInput('emails')">+ Yeni E-mail Əlavə Et</button>
+    </div>
+
+    <button onclick="saveChanges()">💾 Yadda Saxla</button>
+  </div>
+
+  <script>
+    function addInput(id) {
+      const input = document.createElement("input");
+      input.type = (id === "emails") ? "email" : "text";
+      input.placeholder = id === "emails" ? "Yeni E-mail" : "Yeni Nömrə";
+      document.getElementById(id).appendChild(input);
+    }
+
+    function saveChanges() {
+      const map = document.getElementById("map").value;
+      const address = document.getElementById("address").value;
+      const phones = Array.from(document.querySelectorAll("#phones input")).map(el => el.value);
+      const emails = Array.from(document.querySelectorAll("#emails input")).map(el => el.value);
+      console.log({ map, address, phones, emails });
+      alert("Dəyişikliklər saxlanıldı (demo versiya)");
+    }
+  </script>
+
+</body>
+</html>

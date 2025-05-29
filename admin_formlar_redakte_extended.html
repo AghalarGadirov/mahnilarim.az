@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>📝 Formlar və Nümunə Mahnılar Paneli</title>
+  <style>
+    body {
+      background-color: #6A1B9A;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .section {
+      background-color: #9932CC;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      max-width: 750px;
+      text-align: left;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+    .remove-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background-color: #c62828;
+    }
+    .add-btn, .save-btn {
+      background-color: #BA55D3;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 10px;
+    }
+    .save-btn:hover, .add-btn:hover {
+      background-color: #9b3bb8;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 Formlar və 🎵 Nümunə Mahnılar Paneli</h1>
+
+  <div id="formContainer"></div>
+  <button class="add-btn" onclick="addForm()">+ Yeni Form Əlavə Et</button>
+
+  <div class="section">
+    <h2>🎵 Nümunə Mahnılar</h2>
+    <div id="songContainer"></div>
+    <button class="add-btn" onclick="addSong()">+ Mahnı Əlavə Et</button>
+  </div>
+
+  <button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
+
+  <script>
+    let forms = [
+      {
+        title: "Uşaq Formu",
+        questions: [
+          "Uşağın adı, yaşı və xasiyyəti necədir?",
+          "Bu mahnı hansı münasibət üçündür?",
+          "Mahnıda ana/ata adları istifadə olunsunmu?"
+        ]
+      },
+      {
+        title: "Sevgili Formu",
+        questions: [
+          "Sevgilinizin adı və onu necə tanımlayarsınız?",
+          "Sevgi hekayəniz necə başlayıb?",
+          "Mahnıda xüsusi bir xatirəyə yer verilsinmi?"
+        ]
+      }
+    ];
+
+    let songs = [
+      "usag-mahnisi.mp3",
+      "sevgili-mahnisi.mp3"
+    ];
+
+    function renderForms() {
+      const container = document.getElementById("formContainer");
+      container.innerHTML = "";
+      forms.forEach((form, formIndex) => {
+        const formDiv = document.createElement("div");
+        formDiv.className = "section";
+        formDiv.innerHTML = `
+          <label>Form Başlığı:</label>
+          <input type="text" value="${form.title}" onchange="forms[${formIndex}].title = this.value">
+        `;
+
+        form.questions.forEach((q, qIndex) => {
+          formDiv.innerHTML += `
+            <label>Sual ${qIndex + 1}:</label>
+            <input type="text" value="${q}" onchange="forms[${formIndex}].questions[${qIndex}] = this.value">
+            <button class="remove-btn" onclick="removeQuestion(${formIndex}, ${qIndex})">❌ Sualı Sil</button>
+          `;
+        });
+
+        formDiv.innerHTML += `<button class="add-btn" onclick="addQuestion(${formIndex})">+ Sual Əlavə Et</button>`;
+        formDiv.innerHTML += `<button class="remove-btn" onclick="removeForm(${formIndex})">🗑️ Formu Sil</button>`;
+        container.appendChild(formDiv);
+      });
+    }
+
+    function renderSongs() {
+      const container = document.getElementById("songContainer");
+      container.innerHTML = "";
+      songs.forEach((song, index) => {
+        container.innerHTML += `
+          <label>Mahnı ${index + 1}:</label>
+          <input type="text" value="${song}" onchange="songs[${index}] = this.value">
+          <button class="remove-btn" onclick="removeSong(${index})">❌ Sil</button>
+        `;
+      });
+    }
+
+    function addForm() {
+      forms.push({ title: "Yeni Form", questions: [] });
+      renderForms();
+    }
+
+    function removeForm(index) {
+      forms.splice(index, 1);
+      renderForms();
+    }
+
+    function addQuestion(formIndex) {
+      forms[formIndex].questions.push("");
+      renderForms();
+    }
+
+    function removeQuestion(formIndex, qIndex) {
+      forms[formIndex].questions.splice(qIndex, 1);
+      renderForms();
+    }
+
+    function addSong() {
+      songs.push("");
+      renderSongs();
+    }
+
+    function removeSong(index) {
+      songs.splice(index, 1);
+      renderSongs();
+    }
+
+    function saveChanges() {
+      console.log("Formlar:", forms);
+      console.log("Mahnılar:", songs);
+      alert("Dəyişikliklər saxlanıldı (yalnız demo)");
+    }
+
+    renderForms();
+    renderSongs();
+  </script>
+</body>
+</html>
