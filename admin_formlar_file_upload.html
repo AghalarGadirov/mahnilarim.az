@@ -67,15 +67,6 @@
   </style>
 </head>
 <body>
-
-<script>
-  const username = localStorage.getItem("username");
-  const password = localStorage.getItem("password");
-  if (username !== "aga.gadirov" || password !== "fuadyaxsioglandi02") {
-    window.location.href = "admin_login.html";
-  }
-</script>
-
   <h1>📝 Formlar və 🎵 Nümunə Mahnılar Paneli</h1>
 
   <div id="formContainer"></div>
@@ -191,20 +182,5 @@
     renderForms();
     renderSongs();
   </script>
-
-<div style="text-align:center; margin-top: 40px;">
-  <button onclick="logout()" style="padding: 10px 20px; background-color: crimson; color: white; border: none; border-radius: 5px; cursor: pointer;">
-    Çıxış
-  </button>
-</div>
-
-<script>
-  function logout() {
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-    window.location.href = "admin_login.html";
-  }
-</script>
-
 </body>
 </html>

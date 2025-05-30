@@ -57,15 +57,6 @@
 </head>
 <body>
 
-<script>
-  const username = localStorage.getItem("username");
-  const password = localStorage.getItem("password");
-  if (username !== "aga.gadirov" || password !== "fuadyaxsioglandi02") {
-    window.location.href = "admin_login.html";
-  }
-</script>
-
-
   <h1>📞 Bizimlə Əlaqə – Redaktə Paneli</h1>
 
   <div class="section">
@@ -117,21 +108,6 @@
       alert("Dəyişikliklər saxlanıldı (demo versiya)");
     }
   </script>
-
-
-<div style="text-align:center; margin-top: 40px;">
-  <button onclick="logout()" style="padding: 10px 20px; background-color: crimson; color: white; border: none; border-radius: 5px; cursor: pointer;">
-    Çıxış
-  </button>
-</div>
-
-<script>
-  function logout() {
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-    window.location.href = "admin_login.html";
-  }
-</script>
 
 </body>
 </html>
