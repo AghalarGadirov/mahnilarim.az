@@ -3,471 +3,193 @@
 <html lang="az">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Mahni Sifarişi AZ</title>
+<title>📝 Formlar və Mahnılar Paneli</title>
 <style>
     body {
       background-color: #6A1B9A;
       color: white;
+      font-family: Arial, sans-serif;
+      padding: 30px;
       text-align: center;
-      font-family: "Segoe UI", Arial, sans-serif;
-      padding-top: 30px;
-      margin: 0;
     }
-
-    img.responsive-logo {
-      max-width: 120px;
-      height: auto;
-      display: block;
-      margin: 0 auto 10px auto;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      background-color: #BA55D3;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      margin: 10px;
-      cursor: pointer;
-      box-sizing: border-box;
-      font-family: inherit;
-    }
-
-    .form-section {
-      display: none;
-      text-align: left;
-      margin: 20px auto;
+    h1 { margin-bottom: 20px; }
+    .section {
       background-color: #9932CC;
       padding: 20px;
+      margin: 20px auto;
       border-radius: 10px;
-      width: 90%;
-      max-width: 600px;
+      max-width: 750px;
+      text-align: left;
     }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-family: inherit;
-    }
-
     label {
       font-weight: bold;
       display: block;
       margin-top: 10px;
     }
-  
-.menu-container {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  text-align: right;
-}
-.menu-container .hamburger {
-  background-color: #BA55D3;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 22px;
-}
-.menu-items {
-  display: none;
-  background-color: #9932CC;
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 5px;
-}
-.menu-items a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  margin-bottom: 5px;
-}
-.menu-items a:hover {
-  text-decoration: underline;
-}
-
-</style>
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+    .remove-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .remove-btn:hover { background-color: #c62828; }
+    .add-btn, .save-btn {
+      background-color: #BA55D3;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 10px;
+    }
+    .save-btn:hover, .add-btn:hover { background-color: #9b3bb8; }
+  </style>
 </head>
 <body>
-<div class="menu-container">
-<button class="hamburger" onclick="toggleMenu()">☰</button>
-<div class="menu-items" id="menu"><a href="elaqe.html">📞 Bizimlə Əlaqə</a><a href="qiymet.html">💰 Qiymət Siyahısı</a><a href="teklifler.html">💡 Təkliflər/Şikayətlər</a><a href="index.html">🏠 Ana Səhifə</a></div>
-</div>
-<img alt="Logo" class="responsive-logo" src="https://jeromecampion.be/wp-content/uploads/2025/04/ZIK.png"/>
-<h1>Mahni Sifarişi.az</h1>
-<!-- Uşaq Formu -->
-<div class="form-section" id="childForm">
-<h2>Nümunə Mahnı</h2>
-<video controls="" style="border-radius: 10px;" width="100%">
-<source src="video-usaq.mp4" type="video/mp4"/>
-      Sizin brauzer video dəstəkləmir.
-    </video>
-<form id="childFormInputs">
-<label>1️⃣ Uşağın adı, yaşı və xasiyyəti necədir?</label>
-<textarea name="child1" rows="2"></textarea>
-<label>2️⃣ Bu mahnı hansı münasibət üçündür?</label>
-<textarea name="child2" rows="2"></textarea>
-<label>3️⃣ Mahnıda ana/ata adları istifadə olunsunmu?</label>
-<input name="child3" type="text"/>
-<label>4️⃣ İlk övladınızdırmı?</label>
-<input name="child4" type="text"/>
-<label>5️⃣ Ailənin uşağa xüsusi çağırışları varmı?</label>
-<input name="child5" type="text"/>
-<label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-<input name="child6" type="text"/>
-<label>7️⃣ Həzn yoxsa şən mahnı istəyirsiniz?</label>
-<input name="child7" type="text"/>
-<label>8️⃣ Videoformat istəyirsinizsə uşağın şəklini necə göndərə bilərik?</label>
-<input name="child8" type="text"/>
-<label>9️⃣ WhatsApp nömrəniz:</label>
-<input name="child9" type="text"/>
-<button onclick="sendWhatsApp('childFormInputs')" type="button">Təsdiqlə və Göndər</button>
-</form>
-</div>
-<!-- Sevgili Formu -->
-<div class="form-section" id="loverForm">
-<h2>Nümunə Mahnı</h2>
-<video controls="" style="border-radius: 10px;" width="100%">
-<source src="video-sevgili.mp4" type="video/mp4"/>
-      Sizin brauzer video dəstəkləmir.
-    </video>
-<form id="loverFormInputs">
-<label>1️⃣ Sevgilinizin və sizin adınız</label>
-<input name="lover1" type="text"/>
-<label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
-<textarea name="lover2" rows="3"></textarea>
-<label>3️⃣ Sevgilinizin xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
-<textarea name="lover3" rows="2"></textarea>
-<label>4️⃣ Xüsusi xatirələriniz varmı?</label>
-<textarea name="lover4" rows="2"></textarea>
-<label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
-<textarea name="lover5" rows="2"></textarea>
-<label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-<input name="lover6" type="text"/>
-<label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
-<textarea name="lover7" rows="2"></textarea>
-<label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
-<input name="lover8" type="text"/>
-<label>9️⃣ WhatsApp nömrəniz:</label>
-<input name="lover9" type="text"/>
-<button onclick="sendWhatsApp('loverFormInputs')" type="button">Təsdiqlə və Göndər</button>
-</form>
-</div>
-<!-- Ana/Ata Formu -->
-<div class="form-section" id="fatherForm">
-<h2>Nümunə Mahnı</h2>
-<video controls="" style="border-radius: 10px;" width="100%">
-<source src="video-valideyn.mp4" type="video/mp4"/>
-      Sizin brauzer video dəstəkləmir.
-    </video>
-<form id="fatherFormInputs">
-<label>1️⃣ Atanızın/ Ananızın adı</label>
-<input name="father1" type="text"/>
-<label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
-<textarea name="father2" rows="3"></textarea>
-<label>3️⃣ Ananızın xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
-<textarea name="father3" rows="2"></textarea>
-<label>4️⃣ Xüsusi xatirələriniz varmı?</label>
-<textarea name="father4" rows="2"></textarea>
-<label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
-<textarea name="father5" rows="2"></textarea>
-<label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-<input name="father6" type="text"/>
-<label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
-<textarea name="father7" rows="2"></textarea>
-<label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
-<input name="father8" type="text"/>
-<label>9️⃣ WhatsApp nömrəniz:</label>
-<input name="father9" type="text"/>
-<button onclick="sendWhatsApp('fatherFormInputs')" type="button">Təsdiqlə və Göndər</button>
-</form>
-</div>
-<!-- Script hissəsi -->
+<h1>📝 Formlar və Mahnılar Paneli</h1>
+<div id="formContainer"></div>
+<button class="add-btn" onclick="addForm()">+ Yeni Form Əlavə Et</button>
+<div class="section"><label>📱 WhatsApp Nömrəsi:</label><input id="whatsappInput" type="text"/></div><button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
 <script>
-  function showForm(id) {
-    const sections = document.querySelectorAll('.form-section');
-    sections.forEach(s => s.style.display = 'none');
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'block';
-  }
+    let forms = [];
 
+    function createFormElement(form, formIndex) {
+      const formDiv = document.createElement("div");
+      formDiv.className = "section";
+
+      const titleLabel = document.createElement("label");
+      titleLabel.innerText = "Form Başlığı:";
+      formDiv.appendChild(titleLabel);
+
+      const titleInput = document.createElement("input");
+      titleInput.value = form.title;
+      titleInput.onchange = () => forms[formIndex].title = titleInput.value;
+      formDiv.appendChild(titleInput);
+
+      form.questions.forEach((q, qIndex) => {
+        const questionLabel = document.createElement("label");
+        questionLabel.innerText = `Sual ${qIndex + 1}:`;
+        formDiv.appendChild(questionLabel);
+
+        const questionInput = document.createElement("input");
+        questionInput.value = q;
+        questionInput.onchange = () => forms[formIndex].questions[qIndex] = questionInput.value;
+        formDiv.appendChild(questionInput);
+
+        const removeQBtn = document.createElement("button");
+        removeQBtn.innerText = "❌ Sualı Sil";
+        removeQBtn.className = "remove-btn";
+        removeQBtn.onclick = () => {
+          forms[formIndex].questions.splice(qIndex, 1);
+          renderForms();
+        };
+        formDiv.appendChild(removeQBtn);
+      });
+
+      const addQBtn = document.createElement("button");
+      addQBtn.innerText = "+ Sual Əlavə Et";
+      addQBtn.className = "add-btn";
+      addQBtn.onclick = () => {
+        forms[formIndex].questions.push("");
+        renderForms();
+      };
+      formDiv.appendChild(addQBtn);
+
+      const videoLabel = document.createElement("label");
+      videoLabel.innerText = "🎥 Video fayl:";
+      formDiv.appendChild(videoLabel);
+
+      const videoInput = document.createElement("input");
+
+      const typeLabel = document.createElement("label");
+      typeLabel.innerText = "🎞 Video Tipi:";
+      formDiv.appendChild(typeLabel);
+
+      const typeSelect = document.createElement("select");
+      typeSelect.innerHTML = '<option value="video">Video (MP4)</option><option value="instagram">Instagram</option>';
+      typeSelect.value = form.type || "video";
+      typeSelect.onchange = () => forms[formIndex].type = typeSelect.value;
+      formDiv.appendChild(typeSelect);
+    
+      videoInput.value = form.video || "";
+      videoInput.onchange = () => forms[formIndex].video = videoInput.value;
+      formDiv.appendChild(videoInput);
+
+      const removeFormBtn = document.createElement("button");
+      removeFormBtn.innerText = "🗑️ Formu Sil";
+      removeFormBtn.className = "remove-btn";
+      removeFormBtn.onclick = () => {
+        forms.splice(formIndex, 1);
+        renderForms();
+      };
+      formDiv.appendChild(removeFormBtn);
+
+      return formDiv;
+    }
+
+    function renderForms() {
+      const container = document.getElementById("formContainer");
+      container.innerHTML = "";
+      forms.forEach((form, i) => {
+        const formElement = createFormElement(form, i);
+        container.appendChild(formElement);
+      });
+    }
+
+    function addForm() {
+      forms.push({ title: "Yeni Form", questions: [], video: "" });
+      renderForms();
+    }
+
+    function saveChanges() {
+      fetch("https://mahnisifarisim-az.onrender.com/api/formlar", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ forms })
+      })
+      .then(res => res.json())
+      .then(res => alert(res.message || "Dəyişikliklər yadda saxlandı!"))
+      .catch(() => alert("Xəta baş verdi!"));
+    }
+
+    fetch("https://mahnisifarisim-az.onrender.com/api/formlar")
+      .then(res => res.json())
+      .then(data => {
+        forms = data.forms;
+        renderForms();
+      });
   
-  function sendWhatsApp(formId, title) {
-    const form = document.getElementById(formId);
-    const inputs = form.querySelectorAll("input, textarea");
-    let message = `📝 ${title}
-`;
-    inputs.forEach((input, index) => {
-      const val = input.value.trim();
-      if (val) message += `${index + 1}️⃣ ${val}
-`;
-    });
-    const phone = whatsappNumber;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
-      window.location.href = url;
-    });
-  }
-
-`;
-    inputs.forEach((input, index) => {
-      const val = input.value.trim();
-      if (val) message += `${index + 1}️⃣ ${val}
-`;
-    });
-    const phone = whatsappNumber;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.location.href = url;
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    fetch("https://mahnisifarisim-az.onrender.com/api/formlar?t=" + Date.now())
+    // WhatsApp nömrəsini yüklə
+    fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
       .then(res => res.json())
       .then(data => {
-        const buttonsDiv = document.querySelector("h1").nextElementSibling;
-        const formsRoot = document.querySelector("h1").parentElement;
-
-        data.forms.forEach((form, index) => {
-          const id = `form${index}`;
-
-          const btn = document.createElement("button");
-          btn.innerText = form.title;
-          btn.onclick = () => showForm(id);
-          buttonsDiv.insertAdjacentElement("afterend", btn);
-
-          const section = document.createElement("div");
-          section.className = "form-section";
-          section.id = id;
-
-          const video = document.createElement("video");
-          video.controls = true;
-          video.style.borderRadius = "10px";
-          video.style.width = "100%";
-
-          const source = document.createElement("source");
-          source.src = form.video;
-          source.type = "video/mp4";
-          video.appendChild(source);
-
-          const formTitle = document.createElement("h2");
-          formTitle.textContent = "Nümunə Mahnı";
-
-          const htmlForm = document.createElement("form");
-          htmlForm.id = `${id}Inputs`;
-
-          form.questions.forEach((q, i) => {
-            const label = document.createElement("label");
-            label.textContent = `${i + 1}️⃣ ${q}`;
-            const textarea = document.createElement("textarea");
-            textarea.rows = 2;
-            htmlForm.appendChild(label);
-            htmlForm.appendChild(textarea);
-          });
-
-          const submitBtn = document.createElement("button");
-          submitBtn.type = "button";
-          submitBtn.textContent = "Təsdiqlə və Göndər";
-          submitBtn.onclick = () => sendWhatsApp(htmlForm.id, form.title);
-          htmlForm.appendChild(submitBtn);
-
-          section.appendChild(formTitle);
-          section.appendChild(video);
-          section.appendChild(htmlForm);
-          formsRoot.appendChild(section);
-        });
+        document.getElementById("whatsappInput").value = data.whatsapp || "";
       });
-  });
 
-  function showNotificationWithCountdown(text, seconds, callback) {
-    const notif = document.createElement("div");
-    notif.style.position = "fixed";
-    notif.style.top = "20px";
-    notif.style.left = "50%";
-    notif.style.transform = "translateX(-50%)";
-    notif.style.backgroundColor = "#4CAF50";
-    notif.style.color = "white";
-    notif.style.padding = "15px 25px";
-    notif.style.borderRadius = "10px";
-    notif.style.fontSize = "16px";
-    notif.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-    notif.style.zIndex = "9999";
-    notif.style.textAlign = "center";
-    notif.style.maxWidth = "90%";
-    notif.style.wordWrap = "break-word";
+    // Yadda saxla funksiyasına nömrə əlavə et
+    const originalSave = saveChanges;
+    saveChanges = function() {
+      const whatsapp = document.getElementById("whatsappInput").value;
+      fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ whatsapp })
+      }).then(res => res.json()).then(console.log);
 
-    const countdownSpan = document.createElement("span");
-    countdownSpan.style.fontWeight = "bold";
-    countdownSpan.style.marginLeft = "10px";
-    notif.innerText = text + " ";
-    notif.appendChild(countdownSpan);
-
-    document.body.appendChild(notif);
-
-    let current = seconds;
-    countdownSpan.innerText = `⏳ ${current}`;
-
-    const interval = setInterval(() => {
-      current--;
-      if (current > 0) {
-        countdownSpan.innerText = `⏳ ${current}`;
-      } else {
-        clearInterval(interval);
-        notif.remove();
-        callback();
-      }
-    }, 1000);
-  }
-
+      originalSave();
+    };
 </script>
-<script>
-  function showNotificationWithCountdown(text, seconds, callback) {
-    const notif = document.createElement("div");
-    notif.style.position = "fixed";
-    notif.style.top = "20px";
-    notif.style.left = "50%";
-    notif.style.transform = "translateX(-50%)";
-    notif.style.backgroundColor = "#4CAF50";
-    notif.style.color = "white";
-    notif.style.padding = "15px 25px";
-    notif.style.borderRadius = "10px";
-    notif.style.fontSize = "16px";
-    notif.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-    notif.style.zIndex = "9999";
-    notif.style.textAlign = "center";
-    notif.style.maxWidth = "90%";
-    notif.style.wordWrap = "break-word";
-
-    const countdownSpan = document.createElement("span");
-    countdownSpan.style.fontWeight = "bold";
-    countdownSpan.style.marginLeft = "10px";
-    notif.innerText = text + " ";
-    notif.appendChild(countdownSpan);
-
-    document.body.appendChild(notif);
-
-    let current = seconds;
-    countdownSpan.innerText = `⏳ ${current}`;
-
-    const interval = setInterval(() => {
-      current--;
-      if (current > 0) {
-        countdownSpan.innerText = `⏳ ${current}`;
-      } else {
-        clearInterval(interval);
-        notif.remove();
-        callback();
-      }
-    }, 1000);
-  }
-
-  function sendWhatsApp(formId, title) {
-    const form = document.getElementById(formId);
-    const inputs = form.querySelectorAll("input, textarea");
-    let message = `📝 ${title}
-`;
-    inputs.forEach((input, index) => {
-      const val = input.value.trim();
-      if (val) message += `${index + 1}️⃣ ${val}
-`;
-    });
-    const phone = whatsappNumber;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
-      window.location.href = url;
-    });
-  }
-
-  function showForm(id) {
-    const sections = document.querySelectorAll('.form-section');
-    sections.forEach(s => s.style.display = 'none');
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'block';
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    fetch("https://mahnisifarisim-az.onrender.com/api/formlar?t=" + Date.now())
-      .then(res => res.json())
-      .then(data => {
-        const buttonsDiv = document.querySelector("h1").nextElementSibling;
-        const formsRoot = document.querySelector("h1").parentElement;
-
-        data.forms.forEach((form, index) => {
-          const id = `form${index}`;
-
-          const btn = document.createElement("button");
-          btn.innerText = form.title;
-          btn.onclick = () => showForm(id);
-          buttonsDiv.insertAdjacentElement("afterend", btn);
-
-          const section = document.createElement("div");
-          section.className = "form-section";
-          section.id = id;
-
-          const video = document.createElement("video");
-          video.controls = true;
-          video.style.borderRadius = "10px";
-          video.style.width = "100%";
-
-          const source = document.createElement("source");
-          source.src = form.video;
-          source.type = "video/mp4";
-          video.appendChild(source);
-
-          const formTitle = document.createElement("h2");
-          formTitle.textContent = "Nümunə Mahnı";
-
-          const htmlForm = document.createElement("form");
-          htmlForm.id = `${id}Inputs`;
-
-          form.questions.forEach((q, i) => {
-            const label = document.createElement("label");
-            label.textContent = `${i + 1}️⃣ ${q}`;
-            const textarea = document.createElement("textarea");
-            textarea.rows = 2;
-            htmlForm.appendChild(label);
-            htmlForm.appendChild(textarea);
-          });
-
-          const submitBtn = document.createElement("button");
-          submitBtn.type = "button";
-          submitBtn.textContent = "Təsdiqlə və Göndər";
-          submitBtn.onclick = () => sendWhatsApp(htmlForm.id, form.title);
-          htmlForm.appendChild(submitBtn);
-
-          section.appendChild(formTitle);
-          section.appendChild(video);
-          section.appendChild(htmlForm);
-          formsRoot.appendChild(section);
-        });
-      });
-  });
-</script>
-<script>
-let whatsappNumber = "994507142403"; // Default, will be overwritten
-
-// WhatsApp nömrəsini serverdən yüklə
-fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
-  .then(res => res.json())
-  .then(data => {
-    if (data.whatsapp) whatsappNumber = data.whatsapp;
-  });
-
-
-  function toggleMenu() {
-    const menu = document.getElementById("menu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
-  }
-</script>
-</body>
+<script async="True" src="//www.instagram.com/embed.js"></script></body>
 </html>

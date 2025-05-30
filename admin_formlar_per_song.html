@@ -112,6 +112,17 @@
       formDiv.appendChild(videoLabel);
 
       const videoInput = document.createElement("input");
+
+      const typeLabel = document.createElement("label");
+      typeLabel.innerText = "🎞 Video Tipi:";
+      formDiv.appendChild(typeLabel);
+
+      const typeSelect = document.createElement("select");
+      typeSelect.innerHTML = '<option value="video">Video (MP4)</option><option value="instagram">Instagram</option>';
+      typeSelect.value = form.type || "video";
+      typeSelect.onchange = () => forms[formIndex].type = typeSelect.value;
+      formDiv.appendChild(typeSelect);
+    
       videoInput.value = form.video || "";
       videoInput.onchange = () => forms[formIndex].video = videoInput.value;
       formDiv.appendChild(videoInput);
