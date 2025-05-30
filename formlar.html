@@ -213,7 +213,7 @@
       if (val) message += `${index + 1}️⃣ ${val}
 `;
     });
-    const phone = "994507142403";
+    const phone = whatsappNumber;
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
       window.location.href = url;
@@ -226,7 +226,7 @@
       if (val) message += `${index + 1}️⃣ ${val}
 `;
     });
-    const phone = "994507142403";
+    const phone = whatsappNumber;
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.location.href = url;
   }
@@ -381,7 +381,7 @@
       if (val) message += `${index + 1}️⃣ ${val}
 `;
     });
-    const phone = "994507142403";
+    const phone = whatsappNumber;
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
       window.location.href = url;
@@ -454,6 +454,16 @@
   });
 </script>
 <script>
+let whatsappNumber = "994507142403"; // Default, will be overwritten
+
+// WhatsApp nömrəsini serverdən yüklə
+fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
+  .then(res => res.json())
+  .then(data => {
+    if (data.whatsapp) whatsappNumber = data.whatsapp;
+  });
+
+
   function toggleMenu() {
     const menu = document.getElementById("menu");
     menu.style.display = (menu.style.display === "block") ? "none" : "block";

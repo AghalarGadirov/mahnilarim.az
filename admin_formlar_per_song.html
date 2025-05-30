@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <title>📝 Formlar və Mahnılar Paneli</title>
-  <style>
+<meta charset="utf-8"/>
+<title>📝 Formlar və Mahnılar Paneli</title>
+<style>
     body {
       background-color: #6A1B9A;
       color: white;
@@ -57,13 +58,11 @@
   </style>
 </head>
 <body>
-  <h1>📝 Formlar və Mahnılar Paneli</h1>
-
-  <div id="formContainer"></div>
-  <button class="add-btn" onclick="addForm()">+ Yeni Form Əlavə Et</button>
-  <button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
-
-  <script>
+<h1>📝 Formlar və Mahnılar Paneli</h1>
+<div id="formContainer"></div>
+<button class="add-btn" onclick="addForm()">+ Yeni Form Əlavə Et</button>
+<div class="section"><label>📱 WhatsApp Nömrəsi:</label><input id="whatsappInput" type="text"/></div><button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
+<script>
     let forms = [];
 
     function createFormElement(form, formIndex) {
@@ -160,6 +159,26 @@
         forms = data.forms;
         renderForms();
       });
-  </script>
+  
+    // WhatsApp nömrəsini yüklə
+    fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("whatsappInput").value = data.whatsapp || "";
+      });
+
+    // Yadda saxla funksiyasına nömrə əlavə et
+    const originalSave = saveChanges;
+    saveChanges = function() {
+      const whatsapp = document.getElementById("whatsappInput").value;
+      fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ whatsapp })
+      }).then(res => res.json()).then(console.log);
+
+      originalSave();
+    };
+</script>
 </body>
 </html>
