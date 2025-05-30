@@ -1,179 +1,127 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <title>📝 Formlar və Mahnılar Paneli</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formlar Redaktə Paneli</title>
   <style>
     body {
-      background-color: #6A1B9A;
-      color: white;
       font-family: Arial, sans-serif;
-      padding: 30px;
+      background-color: #4A148C;
+      color: white;
+      padding: 20px;
+    }
+    h2 {
       text-align: center;
     }
-    h1 {
-      margin-bottom: 20px;
-    }
-    .section {
-      background-color: #9932CC;
-      padding: 20px;
-      margin: 20px auto;
+    .form-box {
+      background: #7B1FA2;
       border-radius: 10px;
-      max-width: 750px;
-      text-align: left;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .form-box h3 {
+      margin-top: 0;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
     }
     label {
       font-weight: bold;
-      display: block;
-      margin-top: 10px;
     }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: none;
-      font-size: 1em;
-    }
-    .remove-btn {
-      background-color: #e53935;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 6px 10px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    .remove-btn:hover {
-      background-color: #c62828;
-    }
-    .add-btn, .save-btn {
-      background-color: #BA55D3;
-      border: none;
-      border-radius: 5px;
+    button {
+      background-color: #D81B60;
       color: white;
       padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 1em;
-      margin: 10px;
+      margin-right: 10px;
     }
-    .save-btn:hover, .add-btn:hover {
-      background-color: #9b3bb8;
+    button:hover {
+      background-color: #AD1457;
     }
-    audio {
-      width: 100%;
-      margin-top: 10px;
+    .field-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>📝 Formlar və Mahnılar Paneli</h1>
-
-  <div id="formContainer"></div>
-  <button class="add-btn" onclick="addForm()">+ Yeni Form Əlavə Et</button>
-  <button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
+  <h2>📝 Formlar Redaktə Paneli</h2>
+  <div id="forms-container"></div>
+  <div style="text-align:center; margin-top:20px;">
+    <button onclick="saveForms()">✅ Yadda saxla</button>
+  </div>
 
   <script>
-    let forms = [
-      {
-        title: "Uşaq Mahnısı",
-        questions: [
-          "Uşağın adı və yaşı",
-          "Uşağın sevdiyi rəng və heyvan",
-          "Mahnıda hansı duyğular vurğulansın?"
-        ],
-        song: null
-      },
-      {
-        title: "Sevgiliyə Mahnı",
-        questions: [
-          "Sevgilinizin adı",
-          "Ən yadda qalan xatirəniz hansıdır?",
-          "Mahnıda hansı sözlər keçsin?"
-        ],
-        song: null
-      },
-      {
-        title: "Valideynə Hədiyyə Mahnı",
-        questions: [
-          "Hədiyyə ediləcək valideynin adı",
-          "Onunla bağlı ən dəyərli xatirəniz",
-          "Sevgi dolu ifadələr daxil edilsinmi?"
-        ],
-        song: null
-      }
-    ];
+    let data = [];
+
+    async function loadForms() {
+      const res = await fetch('https://mahnisifarisim-az.onrender.com/api/formlar');
+      data = await res.json();
+      renderForms();
+    }
 
     function renderForms() {
-      const container = document.getElementById("formContainer");
-      container.innerHTML = "";
-      forms.forEach((form, formIndex) => {
-        const formDiv = document.createElement("div");
-        formDiv.className = "section";
-        formDiv.innerHTML = `
-          <label>Form Başlığı:</label>
-          <input type="text" value="${form.title}" onchange="forms[${formIndex}].title = this.value">
-        `;
-
-        form.questions.forEach((q, qIndex) => {
-          formDiv.innerHTML += `
-            <label>Sual ${qIndex + 1}:</label>
-            <input type="text" value="${q}" onchange="forms[${formIndex}].questions[${qIndex}] = this.value">
-            <button class="remove-btn" onclick="removeQuestion(${formIndex}, ${qIndex})">❌ Sualı Sil</button>
-          `;
-        });
-
-        formDiv.innerHTML += `
-          <button class="add-btn" onclick="addQuestion(${formIndex})">+ Sual Əlavə Et</button>
-          <label>🎵 Nümunə Mahnı:</label>
-          <input type="file" accept="audio/*" onchange="setSong(event, ${formIndex})">
-          ${form.song ? `<audio controls src="${URL.createObjectURL(form.song)}"></audio>
-          <button class="remove-btn" onclick="removeSong(${formIndex})">❌ Mahnını Sil</button>` : ''}
-          <button class="remove-btn" onclick="removeForm(${formIndex})">🗑️ Formu Sil</button>
-        `;
-        container.appendChild(formDiv);
+      const container = document.getElementById('forms-container');
+      container.innerHTML = '';
+      data.forEach((form, i) => {
+        const div = document.createElement('div');
+        div.className = 'form-box';
+        div.innerHTML = \`
+          <h3>\${form.title}</h3>
+          <label>Nümunə Mahnı Linki:</label>
+          <input type="text" value="\${form.song}" onchange="data[\${i}].song = this.value" />
+          <div id="fields-\${i}">
+            \${form.fields.map((field, j) => \`
+              <div class="field-item">
+                <input type="text" value="\${field.label}" onchange="data[\${i}].fields[\${j}].label = this.value" />
+                <select onchange="data[\${i}].fields[\${j}].type = this.value">
+                  <option value="text" \${field.type === 'text' ? 'selected' : ''}>Text</option>
+                  <option value="textarea" \${field.type === 'textarea' ? 'selected' : ''}>Textarea</option>
+                </select>
+                <button onclick="removeField(\${i}, \${j})">❌</button>
+              </div>
+            \`).join('')}
+          </div>
+          <button onclick="addField(\${i})">➕ Yeni sual əlavə et</button>
+        \`;
+        container.appendChild(div);
       });
     }
 
-    function addForm() {
-      forms.push({ title: "Yeni Form", questions: [], song: null });
+    function addField(index) {
+      data[index].fields.push({ label: "Yeni sual", type: "text" });
       renderForms();
     }
 
-    function removeForm(index) {
-      forms.splice(index, 1);
+    function removeField(i, j) {
+      data[i].fields.splice(j, 1);
       renderForms();
     }
 
-    function addQuestion(formIndex) {
-      forms[formIndex].questions.push("");
-      renderForms();
-    }
-
-    function removeQuestion(formIndex, qIndex) {
-      forms[formIndex].questions.splice(qIndex, 1);
-      renderForms();
-    }
-
-    function setSong(event, formIndex) {
-      const file = event.target.files[0];
-      if (file) {
-        forms[formIndex].song = file;
-        renderForms();
+    async function saveForms() {
+      const res = await fetch('https://mahnisifarisim-az.onrender.com/api/formlar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        alert('Formlar yadda saxlanıldı!');
+      } else {
+        alert('Xəta baş verdi!');
       }
     }
 
-    function removeSong(formIndex) {
-      forms[formIndex].song = null;
-      renderForms();
-    }
-
-    function saveChanges() {
-      console.log("Yadda saxlanılanlar:", forms);
-      alert("Dəyişikliklər saxlanıldı (yalnız demo)");
-    }
-
-    renderForms();
+    loadForms();
   </script>
 </body>
 </html>
