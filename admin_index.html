@@ -31,9 +31,33 @@
   </style>
 </head>
 <body>
+
+<script>
+  const username = localStorage.getItem("username");
+  const password = localStorage.getItem("password");
+  if (username !== "aga.gadirov" || password !== "fuadyaxsioglandi02") {
+    window.location.href = "admin_login.html";
+  }
+</script>
+
   <h1>⚙️ Admin Panel</h1>
   <a href="admin_elaqe_redakte.html" class="link-btn">📞 Əlaqə Bölməsi</a><br>
   <a href="admin_qiymet_redakte.html" class="link-btn">💰 Qiymət Siyahısı</a><br>
   <a href="admin_formlar_per_song.html" class="link-btn">📝 Formlar və Mahnılar</a>
+
+<div style="text-align:center; margin-top: 40px;">
+  <button onclick="logout()" style="padding: 10px 20px; background-color: crimson; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    Çıxış
+  </button>
+</div>
+
+<script>
+  function logout() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+    window.location.href = "admin_login.html";
+  }
+</script>
+
 </body>
 </html>
