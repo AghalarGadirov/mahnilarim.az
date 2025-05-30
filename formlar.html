@@ -4,169 +4,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mahnı Sifarişi Formları</title>
+  <title>Sifariş Formları</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #6a1b9a;
-      color: white;
-    }
-    header {
-      text-align: center;
-      padding: 30px 20px 10px;
-    }
-    header h1 {
-      margin: 10px 0;
-      font-size: 2em;
-    }
-    .buttons {
-      text-align: center;
-      margin: 10px 0 20px;
-    }
-    .buttons button {
-      margin: 5px;
-      padding: 12px 18px;
-      border: none;
-      border-radius: 10px;
-      background-color: #ba68c8;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .form-section {
-      display: none;
-      background-color: #8e24aa;
-      margin: 0 auto 40px;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-    }
-    video {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .question {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-    }
-    textarea {
-      resize: vertical;
-    }
-    .submit-btn {
-      background-color: #ab47bc;
-      padding: 10px 20px;
-      border: none;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-    .menu-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #ba68c8;
-      padding: 10px;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-    }
-    .menu-panel {
-      display: none;
-      position: fixed;
-      top: 70px;
-      right: 20px;
-      background: #ce93d8;
-      padding: 15px;
-      border-radius: 10px;
-    }
-    .menu-panel a {
-      display: block;
-      color: white;
-      margin: 5px 0;
-      text-decoration: none;
-    }
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    h1 { color: #333; }
+    .form-container { background: #fff; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .form-container h3 { margin-top: 0; }
+    .song-preview { margin-top: 10px; }
   </style>
 </head>
 <body>
+  <h1>Hazır Sifariş Formları</h1>
+  <div id="forms-list"></div>
 
-<header>
-  <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" width="50"/>
-  <h1>Mahnı Sifarişi.az</h1>
-</header>
-
-<div class="buttons" id="formButtons"></div>
-
-<div id="formContainers"></div>
-
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-<div class="menu-panel" id="menuPanel">
-  <a href="#">📞 Bizimlə Əlaqə</a>
-  <a href="#">💰 Qiymət Siyahısı</a>
-  <a href="#">📝 Sifariş üçün Form</a>
-  <a href="#">💡 Təkliflər/Şikayətlər</a>
-  <a href="#">🏠 Ana Səhifə</a>
-</div>
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("menuPanel");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  }
-
-  async function loadForms() {
-    const res = await fetch('https://mahnisifarisim-az.onrender.com/api/formlar');
-    const data = await res.json();
-
-    const btnContainer = document.getElementById("formButtons");
-    const formContainer = document.getElementById("formContainers");
-
-    data.forms.forEach((form, index) => {
-      const btn = document.createElement("button");
-      btn.innerText = form.title;
-      btn.onclick = () => {
-        document.querySelectorAll(".form-section").forEach(s => s.style.display = "none");
-        document.getElementById("form-" + index).style.display = "block";
-      };
-      btnContainer.appendChild(btn);
-
-      const section = document.createElement("div");
-      section.className = "form-section";
-      section.id = "form-" + index;
-
-      section.innerHTML = \`
-        <h2>\${form.title}</h2>
-        <video controls src="\${form.video}"></video>
-        \${form.questions.map((q, i) => \`
-          <div class="question">
-            <label>\${q}</label>
-            \${q.includes('?') && q.length < 50 ? '<input type="text" />' : '<textarea rows="2"></textarea>'}
-          </div>
-        \`).join('')}
-        <button class="submit-btn">Təsdiqlə və Göndər</button>
-      \`;
-
-      formContainer.appendChild(section);
-    });
-  }
-
-  loadForms();
-</script>
-
+  <script>
+    fetch('https://mahnisifarisim-az.onrender.com/api/formlar')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('forms-list');
+        if (!Array.isArray(data)) return container.innerHTML = '<p>Form tapılmadı.</p>';
+        container.innerHTML = '';
+        data.forEach((form, index) => {
+          const el = document.createElement('div');
+          el.className = 'form-container';
+          el.innerHTML = `
+            <h3>${form.basliq || 'Başlıq yoxdur'}</h3>
+            <p><strong>Sual:</strong> ${form.sual || 'Yoxdur'}</p>
+            ${form.mahni ? `<div class="song-preview"><audio controls src="${form.mahni}"></audio></div>` : ''}
+          `;
+          container.appendChild(el);
+        });
+      })
+      .catch(() => {
+        document.getElementById('forms-list').innerHTML = '<p>Xəta baş verdi. Zəhmət olmasa yenidən yoxlayın.</p>';
+      });
+  </script>
 </body>
 </html>
