@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mahni Sifarişi AZ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mahni Sifarişi.az</title>
   <style>
     body {
       background-color: #6A1B9A;
       color: white;
-      text-align: center;
       font-family: "Segoe UI", Arial, sans-serif;
-      padding-top: 30px;
+      padding: 20px;
       margin: 0;
+      text-align: center;
     }
 
-    img.responsive-logo {
-      max-width: 120px;
-      height: auto;
-      display: block;
-      margin: 0 auto 10px auto;
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
     }
 
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
+    .menu-container {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+    .hamburger {
       background-color: #BA55D3;
       color: white;
       border: none;
-      border-radius: 10px;
-      margin: 10px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 22px;
       cursor: pointer;
-      box-sizing: border-box;
-      font-family: inherit;
+    }
+    .menu-items {
+      display: none;
+      background-color: #9932CC;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+    .menu-items a {
+      color: white;
+      display: block;
+      text-decoration: none;
+      margin-bottom: 6px;
     }
 
-    .form-section {
-      display: none;
-      text-align: left;
-      margin: 20px auto;
-      background-color: #9932CC;
+    .form-block {
+      background: #9932CC;
+      margin: 25px auto;
       padding: 20px;
       border-radius: 10px;
       width: 90%;
-      max-width: 600px;
+      max-width: 700px;
+      text-align: left;
     }
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-family: inherit;
+    .form-block h2 {
+      text-align: center;
     }
 
     label {
@@ -62,262 +67,49 @@
       display: block;
       margin-top: 10px;
     }
-  
-.menu-container {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  text-align: right;
-}
-.menu-container .hamburger {
-  background-color: #BA55D3;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 22px;
-}
-.menu-items {
-  display: none;
-  background-color: #9932CC;
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 5px;
-}
-.menu-items a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  margin-bottom: 5px;
-}
-.menu-items a:hover {
-  text-decoration: underline;
-}
 
-</style>
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+      font-family: inherit;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    button.send-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #BA55D3;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 <div class="menu-container">
   <button class="hamburger" onclick="toggleMenu()">☰</button>
-  <div id="menu" class="menu-items">
-    <!-- Menyu elementləri JavaScript ilə əlavə olunacaq -->
-  </div>
+  <div id="menu" class="menu-items"></div>
 </div>
 
-
-  <img src="https://jeromecampion.be/wp-content/uploads/2025/04/ZIK.png" alt="Logo" class="responsive-logo">
-  <h1>Mahni Sifarişi.az</h1>
-
-  <button onclick="showForm('childForm')">Uşağıma özəl mahnı sifarişi</button>
-  <button onclick="showForm('loverForm')">Sevgilimə özəl mahnı sifarişi</button>
-  <button onclick="showForm('fatherForm')">Anama/atama özəl mahnı sifarişi</button>
-
-  <!-- Uşaq Formu -->
-  <div id="childForm" class="form-section">
-    <h2>Nümunə Mahnı</h2>
-    <video controls width="100%" style="border-radius: 10px;">
-      <source src="video-usaq.mp4" type="video/mp4">
-      Sizin brauzer video dəstəkləmir.
-    </video>
-    
-<form id="childFormInputs">
-  <label>1️⃣ Uşağın adı, yaşı və xasiyyəti necədir?</label>
-  <textarea name="child1" rows="2"></textarea>
-
-  <label>2️⃣ Bu mahnı hansı münasibət üçündür?</label>
-  <textarea name="child2" rows="2"></textarea>
-
-  <label>3️⃣ Mahnıda ana/ata adları istifadə olunsunmu?</label>
-  <input type="text" name="child3">
-
-  <label>4️⃣ İlk övladınızdırmı?</label>
-  <input type="text" name="child4">
-
-  <label>5️⃣ Ailənin uşağa xüsusi çağırışları varmı?</label>
-  <input type="text" name="child5">
-
-  <label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-  <input type="text" name="child6">
-
-  <label>7️⃣ Həzn yoxsa şən mahnı istəyirsiniz?</label>
-  <input type="text" name="child7">
-
-  <label>8️⃣ Videoformat istəyirsinizsə uşağın şəklini necə göndərə bilərik?</label>
-  <input type="text" name="child8">
-
-  <label>9️⃣ WhatsApp nömrəniz:</label>
-  <input type="text" name="child9">
-
-  <button type="button" onclick="sendWhatsApp('childFormInputs')">Təsdiqlə və Göndər</button>
-</form>
-
-  </div>
-
-  <!-- Sevgili Formu -->
-  <div id="loverForm" class="form-section">
-    <h2>Nümunə Mahnı</h2>
-    <video controls width="100%" style="border-radius: 10px;">
-      <source src="video-sevgili.mp4" type="video/mp4">
-      Sizin brauzer video dəstəkləmir.
-    </video>
-    
-<form id="loverFormInputs">
-  <label>1️⃣ Sevgilinizin və sizin adınız</label>
-  <input type="text" name="lover1">
-
-  <label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
-  <textarea name="lover2" rows="3"></textarea>
-
-  <label>3️⃣ Sevgilinizin xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
-  <textarea name="lover3" rows="2"></textarea>
-
-  <label>4️⃣ Xüsusi xatirələriniz varmı?</label>
-  <textarea name="lover4" rows="2"></textarea>
-
-  <label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
-  <textarea name="lover5" rows="2"></textarea>
-
-  <label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-  <input type="text" name="lover6">
-
-  <label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
-  <textarea name="lover7" rows="2"></textarea>
-
-  <label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
-  <input type="text" name="lover8">
-
-  <label>9️⃣ WhatsApp nömrəniz:</label>
-  <input type="text" name="lover9">
-
-  <button type="button" onclick="sendWhatsApp('loverFormInputs')">Təsdiqlə və Göndər</button>
-</form>
-
-  </div>
-
-  <!-- Ana/Ata Formu -->
-  <div id="fatherForm" class="form-section">
-    <h2>Nümunə Mahnı</h2>
-    <video controls width="100%" style="border-radius: 10px;">
-      <source src="video-valideyn.mp4" type="video/mp4">
-      Sizin brauzer video dəstəkləmir.
-    </video>
-    
-<form id="fatherFormInputs">
-  <label>1️⃣ Atanızın/ Ananızın adı</label>
-  <input type="text" name="father1">
-
-  <label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
-  <textarea name="father2" rows="3"></textarea>
-
-  <label>3️⃣ Ananızın xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
-  <textarea name="father3" rows="2"></textarea>
-
-  <label>4️⃣ Xüsusi xatirələriniz varmı?</label>
-  <textarea name="father4" rows="2"></textarea>
-
-  <label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
-  <textarea name="father5" rows="2"></textarea>
-
-  <label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-  <input type="text" name="father6">
-
-  <label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
-  <textarea name="father7" rows="2"></textarea>
-
-  <label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
-  <input type="text" name="father8">
-
-  <label>9️⃣ WhatsApp nömrəniz:</label>
-  <input type="text" name="father9">
-
-  <button type="button" onclick="sendWhatsApp('fatherFormInputs')">Təsdiqlə və Göndər</button>
-</form>
-
-  </div>
-
-  <!-- Script hissəsi -->
-  <script>
-    function showForm(id) {
-      document.getElementById('childForm').style.display = 'none';
-      document.getElementById('loverForm').style.display = 'none';
-      document.getElementById('fatherForm').style.display = 'none';
-      document.getElementById(id).style.display = 'block';
-    }
-
-    function sendWhatsApp(formId) {
-      const form = document.getElementById(formId);
-      const inputs = form.querySelectorAll("input, textarea");
-      let message = "";
-
-      if (formId === "childFormInputs") {
-        message += "🧒🏻 Uşağım üçün\n";
-      } else if (formId === "loverFormInputs") {
-        message += "❤️ Sevgilim üçün\n";
-      } else if (formId === "fatherFormInputs") {
-        message += "👨‍👩‍👧 Anam/Atam üçün\n";
-      }
-
-      inputs.forEach((input, index) => {
-        const answer = input.value.trim();
-        if (answer) {
-          message += `${index + 1}️⃣ ${answer}\n`;
-        }
-      });
-
-      const phone = "994507142403";
-      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
-        window.location.href = url;
-      });
-    }
-
-    function showNotificationWithCountdown(text, seconds, callback) {
-      const notif = document.createElement("div");
-      notif.style.position = "fixed";
-      notif.style.top = "20px";
-      notif.style.left = "50%";
-      notif.style.transform = "translateX(-50%)";
-      notif.style.backgroundColor = "#4CAF50";
-      notif.style.color = "white";
-      notif.style.padding = "15px 25px";
-      notif.style.borderRadius = "10px";
-      notif.style.fontSize = "16px";
-      notif.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-      notif.style.zIndex = "9999";
-      notif.style.textAlign = "center";
-      notif.style.maxWidth = "90%";
-      notif.style.wordWrap = "break-word";
-
-      const countdownSpan = document.createElement("span");
-      countdownSpan.style.fontWeight = "bold";
-      countdownSpan.style.marginLeft = "10px";
-      notif.innerText = text + " ";
-      notif.appendChild(countdownSpan);
-
-      document.body.appendChild(notif);
-
-      let current = seconds;
-      countdownSpan.innerText = `⏳ ${current}`;
-
-      const interval = setInterval(() => {
-        current--;
-        if (current > 0) {
-          countdownSpan.innerText = `⏳ ${current}`;
-        } else {
-          clearInterval(interval);
-          notif.remove();
-          callback();
-        }
-      }, 1000);
-    }
-  </script>
+<h1>Mahni Sifarişi.az</h1>
+<div id="formContainer"></div>
 
 <script>
   function toggleMenu() {
     const menu = document.getElementById("menu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
   }
 
   const pages = [
@@ -329,7 +121,6 @@
   ];
 
   const currentPage = window.location.pathname.split("/").pop();
-
   window.onload = function() {
     const menu = document.getElementById("menu");
     pages.forEach(p => {
@@ -341,7 +132,42 @@
       }
     });
   };
-</script>
 
+  function sendWhatsApp(formId, prefix) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll("input, textarea");
+    let message = prefix + "\n";
+    inputs.forEach((input, index) => {
+      const val = input.value.trim();
+      if (val) message += `${index + 1}️⃣ ${val}\n`;
+    });
+
+    const phone = "994507142403";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.location.href = url;
+  }
+
+  fetch("https://mahnisifarisim-az.onrender.com/api/formlar")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("formContainer");
+      data.forms.forEach((form, i) => {
+        const div = document.createElement("div");
+        div.className = "form-block";
+        const formId = `form${i}`;
+
+        div.innerHTML = \`
+          <h2>\${form.title}</h2>
+          \${form.video ? \`<video controls src="\${form.video}"></video>\` : ""}
+          <form id="\${formId}">\${form.questions.map((q, j) => \`
+            <label>\${j + 1}️⃣ \${q}</label>
+            <textarea rows="2"></textarea>\`).join("")}
+            <button type="button" class="send-btn" onclick="sendWhatsApp('\${formId}', '📝 \${form.title}')">Təsdiqlə və Göndər</button>
+          </form>
+        \`;
+        container.appendChild(div);
+      });
+    });
+</script>
 </body>
 </html>
