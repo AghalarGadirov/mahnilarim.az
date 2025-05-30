@@ -11,9 +11,7 @@
       padding: 30px;
       text-align: center;
     }
-    h1 {
-      margin-bottom: 20px;
-    }
+    h1 { margin-bottom: 20px; }
     .section {
       background-color: #9932CC;
       padding: 20px;
@@ -44,9 +42,7 @@
       margin-top: 10px;
       cursor: pointer;
     }
-    .remove-btn:hover {
-      background-color: #c62828;
-    }
+    .remove-btn:hover { background-color: #c62828; }
     .add-btn, .save-btn {
       background-color: #BA55D3;
       border: none;
@@ -57,13 +53,7 @@
       font-size: 1em;
       margin: 10px;
     }
-    .save-btn:hover, .add-btn:hover {
-      background-color: #9b3bb8;
-    }
-    audio {
-      width: 100%;
-      margin-top: 10px;
-    }
+    .save-btn:hover, .add-btn:hover { background-color: #9b3bb8; }
   </style>
 </head>
 <body>
@@ -74,106 +64,102 @@
   <button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
 
   <script>
-    let forms = [
-      {
-        title: "Uşaq Mahnısı",
-        questions: [
-          "Uşağın adı və yaşı",
-          "Uşağın sevdiyi rəng və heyvan",
-          "Mahnıda hansı duyğular vurğulansın?"
-        ],
-        song: null
-      },
-      {
-        title: "Sevgiliyə Mahnı",
-        questions: [
-          "Sevgilinizin adı",
-          "Ən yadda qalan xatirəniz hansıdır?",
-          "Mahnıda hansı sözlər keçsin?"
-        ],
-        song: null
-      },
-      {
-        title: "Valideynə Hədiyyə Mahnı",
-        questions: [
-          "Hədiyyə ediləcək valideynin adı",
-          "Onunla bağlı ən dəyərli xatirəniz",
-          "Sevgi dolu ifadələr daxil edilsinmi?"
-        ],
-        song: null
-      }
-    ];
+    let forms = [];
+
+    function createFormElement(form, formIndex) {
+      const formDiv = document.createElement("div");
+      formDiv.className = "section";
+
+      const titleLabel = document.createElement("label");
+      titleLabel.innerText = "Form Başlığı:";
+      formDiv.appendChild(titleLabel);
+
+      const titleInput = document.createElement("input");
+      titleInput.value = form.title;
+      titleInput.onchange = () => forms[formIndex].title = titleInput.value;
+      formDiv.appendChild(titleInput);
+
+      form.questions.forEach((q, qIndex) => {
+        const questionLabel = document.createElement("label");
+        questionLabel.innerText = `Sual ${qIndex + 1}:`;
+        formDiv.appendChild(questionLabel);
+
+        const questionInput = document.createElement("input");
+        questionInput.value = q;
+        questionInput.onchange = () => forms[formIndex].questions[qIndex] = questionInput.value;
+        formDiv.appendChild(questionInput);
+
+        const removeQBtn = document.createElement("button");
+        removeQBtn.innerText = "❌ Sualı Sil";
+        removeQBtn.className = "remove-btn";
+        removeQBtn.onclick = () => {
+          forms[formIndex].questions.splice(qIndex, 1);
+          renderForms();
+        };
+        formDiv.appendChild(removeQBtn);
+      });
+
+      const addQBtn = document.createElement("button");
+      addQBtn.innerText = "+ Sual Əlavə Et";
+      addQBtn.className = "add-btn";
+      addQBtn.onclick = () => {
+        forms[formIndex].questions.push("");
+        renderForms();
+      };
+      formDiv.appendChild(addQBtn);
+
+      const videoLabel = document.createElement("label");
+      videoLabel.innerText = "🎥 Video fayl:";
+      formDiv.appendChild(videoLabel);
+
+      const videoInput = document.createElement("input");
+      videoInput.value = form.video || "";
+      videoInput.onchange = () => forms[formIndex].video = videoInput.value;
+      formDiv.appendChild(videoInput);
+
+      const removeFormBtn = document.createElement("button");
+      removeFormBtn.innerText = "🗑️ Formu Sil";
+      removeFormBtn.className = "remove-btn";
+      removeFormBtn.onclick = () => {
+        forms.splice(formIndex, 1);
+        renderForms();
+      };
+      formDiv.appendChild(removeFormBtn);
+
+      return formDiv;
+    }
 
     function renderForms() {
       const container = document.getElementById("formContainer");
       container.innerHTML = "";
-      forms.forEach((form, formIndex) => {
-        const formDiv = document.createElement("div");
-        formDiv.className = "section";
-        formDiv.innerHTML = `
-          <label>Form Başlığı:</label>
-          <input type="text" value="${form.title}" onchange="forms[${formIndex}].title = this.value">
-        `;
-
-        form.questions.forEach((q, qIndex) => {
-          formDiv.innerHTML += `
-            <label>Sual ${qIndex + 1}:</label>
-            <input type="text" value="${q}" onchange="forms[${formIndex}].questions[${qIndex}] = this.value">
-            <button class="remove-btn" onclick="removeQuestion(${formIndex}, ${qIndex})">❌ Sualı Sil</button>
-          `;
-        });
-
-        formDiv.innerHTML += `
-          <button class="add-btn" onclick="addQuestion(${formIndex})">+ Sual Əlavə Et</button>
-          <label>🎵 Nümunə Mahnı:</label>
-          <input type="file" accept="audio/*" onchange="setSong(event, ${formIndex})">
-          ${form.song ? `<audio controls src="${URL.createObjectURL(form.song)}"></audio>
-          <button class="remove-btn" onclick="removeSong(${formIndex})">❌ Mahnını Sil</button>` : ''}
-          <button class="remove-btn" onclick="removeForm(${formIndex})">🗑️ Formu Sil</button>
-        `;
-        container.appendChild(formDiv);
+      forms.forEach((form, i) => {
+        const formElement = createFormElement(form, i);
+        container.appendChild(formElement);
       });
     }
 
     function addForm() {
-      forms.push({ title: "Yeni Form", questions: [], song: null });
-      renderForms();
-    }
-
-    function removeForm(index) {
-      forms.splice(index, 1);
-      renderForms();
-    }
-
-    function addQuestion(formIndex) {
-      forms[formIndex].questions.push("");
-      renderForms();
-    }
-
-    function removeQuestion(formIndex, qIndex) {
-      forms[formIndex].questions.splice(qIndex, 1);
-      renderForms();
-    }
-
-    function setSong(event, formIndex) {
-      const file = event.target.files[0];
-      if (file) {
-        forms[formIndex].song = file;
-        renderForms();
-      }
-    }
-
-    function removeSong(formIndex) {
-      forms[formIndex].song = null;
+      forms.push({ title: "Yeni Form", questions: [], video: "" });
       renderForms();
     }
 
     function saveChanges() {
-      console.log("Yadda saxlanılanlar:", forms);
-      alert("Dəyişikliklər saxlanıldı (yalnız demo)");
+      fetch("https://mahnisifarisim-az.onrender.com/api/formlar", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ forms })
+      })
+      .then(res => res.json())
+      .then(res => alert(res.message || "Dəyişikliklər yadda saxlandı!"))
+      .catch(() => alert("Xəta baş verdi!"));
     }
 
-    renderForms();
+    fetch("https://mahnisifarisim-az.onrender.com/api/formlar")
+      .then(res => res.json())
+      .then(data => {
+        forms = data.forms;
+        renderForms();
+      });
   </script>
 </body>
 </html>
