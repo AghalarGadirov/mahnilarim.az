@@ -1,173 +1,109 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mahni Sifarişi.az</title>
+  <title>Sifariş Formları</title>
   <style>
     body {
       background-color: #6A1B9A;
       color: white;
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: Arial, sans-serif;
       padding: 20px;
       margin: 0;
       text-align: center;
     }
-
     h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
-
-    .menu-container {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 1000;
-    }
-    .hamburger {
-      background-color: #BA55D3;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 22px;
-      cursor: pointer;
-    }
-    .menu-items {
-      display: none;
-      background-color: #9932CC;
-      padding: 10px;
-      border-radius: 10px;
-      margin-top: 5px;
-    }
-    .menu-items a {
-      color: white;
-      display: block;
-      text-decoration: none;
-      margin-bottom: 6px;
-    }
-
     .form-block {
       background: #9932CC;
-      margin: 25px auto;
+      margin: 20px auto;
       padding: 20px;
       border-radius: 10px;
-      width: 90%;
       max-width: 700px;
       text-align: left;
     }
-
     .form-block h2 {
       text-align: center;
+      color: #fff;
     }
-
     label {
-      font-weight: bold;
       display: block;
+      font-weight: bold;
       margin-top: 10px;
     }
-
-    input, textarea {
+    textarea, input {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
       margin-bottom: 15px;
-      border-radius: 5px;
       border: none;
-      font-family: inherit;
+      border-radius: 5px;
       font-size: 16px;
       box-sizing: border-box;
     }
-
     video {
       width: 100%;
-      border-radius: 10px;
       margin-top: 10px;
+      border-radius: 10px;
     }
-
-    button.send-btn {
-      padding: 10px 20px;
-      font-size: 16px;
+    button {
       background-color: #BA55D3;
       color: white;
       border: none;
       border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
       cursor: pointer;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-<div class="menu-container">
-  <button class="hamburger" onclick="toggleMenu()">☰</button>
-  <div id="menu" class="menu-items"></div>
-</div>
+  <h1>📝 Hazır Sifariş Formları</h1>
+  <div id="formContainer">Yüklənir...</div>
 
-<h1>Mahni Sifarişi.az</h1>
-<div id="formContainer"></div>
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("menu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  }
-
-  const pages = [
-    { name: "📞 Bizimlə Əlaqə", url: "elaqe.html" },
-    { name: "💰 Qiymət Siyahısı", url: "qiymet.html" },
-    { name: "📝 Sifariş üçün Form", url: "formlar.html" },
-    { name: "💡 Təkliflər/Şikayətlər", url: "teklifler.html" },
-    { name: "🏠 Ana Səhifə", url: "index.html" }
-  ];
-
-  const currentPage = window.location.pathname.split("/").pop();
-  window.onload = function() {
-    const menu = document.getElementById("menu");
-    pages.forEach(p => {
-      if (p.url !== currentPage) {
-        const link = document.createElement("a");
-        link.href = p.url;
-        link.textContent = p.name;
-        menu.appendChild(link);
-      }
-    });
-  };
-
-  function sendWhatsApp(formId, prefix) {
-    const form = document.getElementById(formId);
-    const inputs = form.querySelectorAll("input, textarea");
-    let message = prefix + "\n";
-    inputs.forEach((input, index) => {
-      const val = input.value.trim();
-      if (val) message += `${index + 1}️⃣ ${val}\n`;
-    });
-
-    const phone = "994507142403";
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.location.href = url;
-  }
-
-  fetch("https://mahnisifarisim-az.onrender.com/api/formlar")
-    .then(res => res.json())
-    .then(data => {
-      const container = document.getElementById("formContainer");
-      data.forms.forEach((form, i) => {
-        const div = document.createElement("div");
-        div.className = "form-block";
-        const formId = `form${i}`;
-
-        div.innerHTML = \`
-          <h2>\${form.title}</h2>
-          \${form.video ? \`<video controls src="\${form.video}"></video>\` : ""}
-          <form id="\${formId}">\${form.questions.map((q, j) => \`
-            <label>\${j + 1}️⃣ \${q}</label>
-            <textarea rows="2"></textarea>\`).join("")}
-            <button type="button" class="send-btn" onclick="sendWhatsApp('\${formId}', '📝 \${form.title}')">Təsdiqlə və Göndər</button>
-          </form>
-        \`;
-        container.appendChild(div);
+  <script>
+    function sendWhatsApp(formId, title) {
+      const form = document.getElementById(formId);
+      const inputs = form.querySelectorAll("input, textarea");
+      let message = "📝 " + title + "\n";
+      inputs.forEach((el, i) => {
+        if (el.value.trim()) {
+          message += (i+1) + "️⃣ " + el.value.trim() + "\n";
+        }
       });
-    });
-</script>
+      const phone = "994507142403";
+      const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+      window.location.href = url;
+    }
+
+    fetch("https://mahnisifarisim-az.onrender.com/api/formlar?t=" + new Date().getTime())
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("formContainer");
+        container.innerHTML = "";
+        data.forms.forEach((form, i) => {
+          const formId = "form" + i;
+          const block = document.createElement("div");
+          block.className = "form-block";
+          block.innerHTML = \`
+            <h2>\${form.title}</h2>
+            \${form.video ? '<video controls src="' + form.video + '"></video>' : ''}
+            <form id="\${formId}">\` +
+            form.questions.map((q, j) => \`
+              <label>\${j+1}️⃣ \${q}</label>
+              <textarea rows="2"></textarea>\`).join("") + \`
+              <button type="button" onclick="sendWhatsApp('\${formId}', '\${form.title}')">Təsdiqlə və Göndər</button>
+            </form>
+          \`;
+          container.appendChild(block);
+        });
+      })
+      .catch(err => {
+        document.getElementById("formContainer").innerHTML = "<p style='color:red;'>Xəta baş verdi.</p>";
+      });
+  </script>
 </body>
 </html>
