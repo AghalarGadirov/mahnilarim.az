@@ -22,9 +22,9 @@
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById('forms-list');
-        if (!Array.isArray(data)) return container.innerHTML = '<p>Form tapılmadı.</p>';
+        if (!Array.isArray(data.forms)) return container.innerHTML = '<p>Form tapılmadı.</p>';
         container.innerHTML = '';
-        data.forEach((form, index) => {
+        data.forms.forEach((form, index) => {
           const el = document.createElement('div');
           el.className = 'form-container';
           el.innerHTML = `
