@@ -77,12 +77,17 @@
       font-weight: bold;
       margin-bottom: 10px;
     }
-    .card p {
-      font-size: 18px;
-      margin: 0;
+    .card .old-price {
+      text-decoration: line-through;
+      color: #f8c8dc;
+      margin-right: 10px;
+    }
+    .card .new-price {
+      color: #00ffcc;
+      font-weight: bold;
     }
     #countdown {
-      background: #757575;
+      background: red;
       color: white;
       padding: 10px 20px;
       border-radius: 10px;
@@ -114,6 +119,7 @@
   <div id="countdown">Yüklənir...</div>
 
   <script>
+    let endTimeGlobal = null;
     function toggleMenu() {
       var menu = document.getElementById("dropdownMenu");
       menu.style.display = menu.style.display === "block" ? "none" : "block";
@@ -122,34 +128,32 @@
     fetch("https://mahnisifarisim-az.onrender.com/api/qiymet")
       .then(res => res.json())
       .then(data => {
+        endTimeGlobal = new Date(data.endTime).getTime();
         const container = document.getElementById("price-container");
         container.innerHTML = "";
+        const now = new Date().getTime();
+        const discountActive = now < endTimeGlobal;
+
         data.items.forEach(item => {
           const card = document.createElement("div");
           card.className = "card";
+
+          let priceHTML = "";
+          if (discountActive) {
+            priceHTML = `
+              <span class="old-price">${item.oldPrice}</span>
+              <span class="new-price">${item.newPrice}</span>
+            `;
+          } else {
+            priceHTML = `<span class="new-price">${item.newPrice}</span>`;
+          }
+
           card.innerHTML = `
             <h2>${item.title}</h2>
-            <p>${item.newPrice}</p>
+            <p>${priceHTML}</p>
           `;
           container.appendChild(card);
         });
-
-        const endTime = new Date(data.endTime).getTime();
-        const countdownEl = document.getElementById("countdown");
-
-        function updateCountdown() {
-          const now = new Date().getTime();
-          const diff = endTime - now;
-          if (diff <= 0) {
-            countdownEl.innerText = "Endirim bitdi";
-            return;
-          }
-          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-          const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-          const m = Math.floor((diff / (1000 * 60)) % 60);
-          const s = Math.floor((diff / 1000) % 60);
-          countdownEl.innerText = `Endirimə qalan vaxt: ${d} gün, ${h} saat, ${m} dəq, ${s} san`;
-        }
 
         updateCountdown();
         setInterval(updateCountdown, 1000);
@@ -158,6 +162,23 @@
         document.getElementById("price-container").innerHTML = "<p style='color:red;'>Xəta baş verdi!</p>";
         document.getElementById("countdown").innerText = "";
       });
+
+    function updateCountdown() {
+      if (!endTimeGlobal) return;
+      const now = new Date().getTime();
+      const diff = endTimeGlobal - now;
+      const countdownEl = document.getElementById("countdown");
+
+      if (diff <= 0) {
+        countdownEl.innerText = "Endirim bitdi";
+        return;
+      }
+
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      countdownEl.innerText = `Endirim bitməsinə: ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    }
   </script>
 </body>
 </html>
