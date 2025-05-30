@@ -256,7 +256,7 @@
       if (val) message += `${index + 1}️⃣ ${val}
 `;
     });
-    const phone = "994507142403";
+    const phone = window.formPhone || "994507142403";
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
       window.location.href = url;
@@ -269,7 +269,7 @@
       if (val) message += `${index + 1}️⃣ ${val}
 `;
     });
-    const phone = "994507142403";
+    const phone = window.formPhone || "994507142403";
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.location.href = url;
   }
@@ -281,6 +281,7 @@
         const buttonsDiv = document.querySelector("h1").nextElementSibling;
         const formsRoot = document.querySelector("h1").parentElement;
 
+        window.formPhone = data.phone;
         data.forms.forEach((form, index) => {
           const id = `form${index}`;
 
@@ -293,39 +294,27 @@
           section.className = "form-section";
           section.id = id;
 
-          const video = document.createElement("video");
-          video.controls = true;
-          video.style.borderRadius = "10px";
-          video.style.width = "100%";
+          
+          let videoEmbed;
+          if (form.video.includes("instagram.com")) {
+            videoEmbed = document.createElement("iframe");
+            videoEmbed.src = form.video.replace("/reel/", "/reel/") + "embed";
+            videoEmbed.width = "100%";
+            videoEmbed.height = "500";
+            videoEmbed.style.border = "none";
+            videoEmbed.allowFullscreen = true;
+          } else {
+            videoEmbed = document.createElement("video");
+            videoEmbed.controls = true;
+            videoEmbed.style.borderRadius = "10px";
+            videoEmbed.style.width = "100%";
+            const source = document.createElement("source");
+            source.src = form.video;
+            source.type = "video/mp4";
+            videoEmbed.appendChild(source);
+          }
+          section.appendChild(videoEmbed);
 
-          const source = document.createElement("source");
-          source.src = form.video;
-          source.type = "video/mp4";
-          video.appendChild(source);
-
-          const formTitle = document.createElement("h2");
-          formTitle.textContent = "Nümunə Mahnı";
-
-          const htmlForm = document.createElement("form");
-          htmlForm.id = `${id}Inputs`;
-
-          form.questions.forEach((q, i) => {
-            const label = document.createElement("label");
-            label.textContent = `${i + 1}️⃣ ${q}`;
-            const textarea = document.createElement("textarea");
-            textarea.rows = 2;
-            htmlForm.appendChild(label);
-            htmlForm.appendChild(textarea);
-          });
-
-          const submitBtn = document.createElement("button");
-          submitBtn.type = "button";
-          submitBtn.textContent = "Təsdiqlə və Göndər";
-          submitBtn.onclick = () => sendWhatsApp(htmlForm.id, form.title);
-          htmlForm.appendChild(submitBtn);
-
-          section.appendChild(formTitle);
-          section.appendChild(video);
           section.appendChild(htmlForm);
           formsRoot.appendChild(section);
         });
@@ -427,7 +416,7 @@
       if (val) message += `${index + 1}️⃣ ${val}
 `;
     });
-    const phone = "994507142403";
+    const phone = window.formPhone || "994507142403";
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
       window.location.href = url;
@@ -448,6 +437,7 @@
         const buttonsDiv = document.querySelector("h1").nextElementSibling;
         const formsRoot = document.querySelector("h1").parentElement;
 
+        window.formPhone = data.phone;
         data.forms.forEach((form, index) => {
           const id = `form${index}`;
 
@@ -460,39 +450,27 @@
           section.className = "form-section";
           section.id = id;
 
-          const video = document.createElement("video");
-          video.controls = true;
-          video.style.borderRadius = "10px";
-          video.style.width = "100%";
+          
+          let videoEmbed;
+          if (form.video.includes("instagram.com")) {
+            videoEmbed = document.createElement("iframe");
+            videoEmbed.src = form.video.replace("/reel/", "/reel/") + "embed";
+            videoEmbed.width = "100%";
+            videoEmbed.height = "500";
+            videoEmbed.style.border = "none";
+            videoEmbed.allowFullscreen = true;
+          } else {
+            videoEmbed = document.createElement("video");
+            videoEmbed.controls = true;
+            videoEmbed.style.borderRadius = "10px";
+            videoEmbed.style.width = "100%";
+            const source = document.createElement("source");
+            source.src = form.video;
+            source.type = "video/mp4";
+            videoEmbed.appendChild(source);
+          }
+          section.appendChild(videoEmbed);
 
-          const source = document.createElement("source");
-          source.src = form.video;
-          source.type = "video/mp4";
-          video.appendChild(source);
-
-          const formTitle = document.createElement("h2");
-          formTitle.textContent = "Nümunə Mahnı";
-
-          const htmlForm = document.createElement("form");
-          htmlForm.id = `${id}Inputs`;
-
-          form.questions.forEach((q, i) => {
-            const label = document.createElement("label");
-            label.textContent = `${i + 1}️⃣ ${q}`;
-            const textarea = document.createElement("textarea");
-            textarea.rows = 2;
-            htmlForm.appendChild(label);
-            htmlForm.appendChild(textarea);
-          });
-
-          const submitBtn = document.createElement("button");
-          submitBtn.type = "button";
-          submitBtn.textContent = "Təsdiqlə və Göndər";
-          submitBtn.onclick = () => sendWhatsApp(htmlForm.id, form.title);
-          htmlForm.appendChild(submitBtn);
-
-          section.appendChild(formTitle);
-          section.appendChild(video);
           section.appendChild(htmlForm);
           formsRoot.appendChild(section);
         });
