@@ -59,12 +59,6 @@
 <body>
   <h1>📝 Formlar və Mahnılar Paneli</h1>
 
-  <div style="max-width: 750px; margin: 0 auto 20px auto; background: #7b1fa2; padding: 15px; border-radius: 10px;">
-    <label>📱 WhatsApp nömrəsi (başında ölkə kodu ilə, məsələn: 99450...):</label>
-    <input type="text" id="whatsappNumber" placeholder="994507142403" />
-  </div>
-
-
   <div id="formContainer"></div>
   <button class="add-btn" onclick="addForm()">+ Yeni Form Əlavə Et</button>
   <button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
@@ -150,11 +144,10 @@
     }
 
     function saveChanges() {
-      const phoneNumber = document.getElementById("whatsappNumber").value.trim();
       fetch("https://mahnisifarisim-az.onrender.com/api/formlar", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ forms, phone: phoneNumber })
+        body: JSON.stringify({ forms })
       })
       .then(res => res.json())
       .then(res => alert(res.message || "Dəyişikliklər yadda saxlandı!"))
@@ -165,7 +158,6 @@
       .then(res => res.json())
       .then(data => {
         forms = data.forms;
-        if (data.phone) document.getElementById("whatsappNumber").value = data.phone;
         renderForms();
       });
   </script>
