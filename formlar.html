@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mahni Sifarişi AZ</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mahni Sifarişi AZ</title>
+<style>
     body {
       background-color: #6A1B9A;
       color: white;
@@ -100,143 +101,99 @@
 </head>
 <body>
 <div class="menu-container">
-  <button class="hamburger" onclick="toggleMenu()">☰</button>
-  <div id="menu" class="menu-items">
-    <!-- Menyu elementləri JavaScript ilə əlavə olunacaq -->
-  </div>
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+<div class="menu-items" id="menu"><a href="elaqe.html">📞 Bizimlə Əlaqə</a><a href="qiymet.html">💰 Qiymət Siyahısı</a><a href="teklifler.html">💡 Təkliflər/Şikayətlər</a><a href="index.html">🏠 Ana Səhifə</a></div>
 </div>
-
-
-  <img src="https://jeromecampion.be/wp-content/uploads/2025/04/ZIK.png" alt="Logo" class="responsive-logo">
-  <h1>Mahni Sifarişi.az</h1>
-
-  
-
-  <!-- Uşaq Formu -->
-  <div id="childForm" class="form-section">
-    <h2>Nümunə Mahnı</h2>
-    <video controls width="100%" style="border-radius: 10px;">
-      <source src="video-usaq.mp4" type="video/mp4">
+<img alt="Logo" class="responsive-logo" src="https://jeromecampion.be/wp-content/uploads/2025/04/ZIK.png"/>
+<h1>Mahni Sifarişi.az</h1>
+<!-- Uşaq Formu -->
+<div class="form-section" id="childForm">
+<h2>Nümunə Mahnı</h2>
+<video controls="" style="border-radius: 10px;" width="100%">
+<source src="video-usaq.mp4" type="video/mp4"/>
       Sizin brauzer video dəstəkləmir.
     </video>
-    
 <form id="childFormInputs">
-  <label>1️⃣ Uşağın adı, yaşı və xasiyyəti necədir?</label>
-  <textarea name="child1" rows="2"></textarea>
-
-  <label>2️⃣ Bu mahnı hansı münasibət üçündür?</label>
-  <textarea name="child2" rows="2"></textarea>
-
-  <label>3️⃣ Mahnıda ana/ata adları istifadə olunsunmu?</label>
-  <input type="text" name="child3">
-
-  <label>4️⃣ İlk övladınızdırmı?</label>
-  <input type="text" name="child4">
-
-  <label>5️⃣ Ailənin uşağa xüsusi çağırışları varmı?</label>
-  <input type="text" name="child5">
-
-  <label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-  <input type="text" name="child6">
-
-  <label>7️⃣ Həzn yoxsa şən mahnı istəyirsiniz?</label>
-  <input type="text" name="child7">
-
-  <label>8️⃣ Videoformat istəyirsinizsə uşağın şəklini necə göndərə bilərik?</label>
-  <input type="text" name="child8">
-
-  <label>9️⃣ WhatsApp nömrəniz:</label>
-  <input type="text" name="child9">
-
-  <button type="button" onclick="sendWhatsApp('childFormInputs')">Təsdiqlə və Göndər</button>
+<label>1️⃣ Uşağın adı, yaşı və xasiyyəti necədir?</label>
+<textarea name="child1" rows="2"></textarea>
+<label>2️⃣ Bu mahnı hansı münasibət üçündür?</label>
+<textarea name="child2" rows="2"></textarea>
+<label>3️⃣ Mahnıda ana/ata adları istifadə olunsunmu?</label>
+<input name="child3" type="text"/>
+<label>4️⃣ İlk övladınızdırmı?</label>
+<input name="child4" type="text"/>
+<label>5️⃣ Ailənin uşağa xüsusi çağırışları varmı?</label>
+<input name="child5" type="text"/>
+<label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
+<input name="child6" type="text"/>
+<label>7️⃣ Həzn yoxsa şən mahnı istəyirsiniz?</label>
+<input name="child7" type="text"/>
+<label>8️⃣ Videoformat istəyirsinizsə uşağın şəklini necə göndərə bilərik?</label>
+<input name="child8" type="text"/>
+<label>9️⃣ WhatsApp nömrəniz:</label>
+<input name="child9" type="text"/>
+<button onclick="sendWhatsApp('childFormInputs')" type="button">Təsdiqlə və Göndər</button>
 </form>
-
-  </div>
-
-  <!-- Sevgili Formu -->
-  <div id="loverForm" class="form-section">
-    <h2>Nümunə Mahnı</h2>
-    <video controls width="100%" style="border-radius: 10px;">
-      <source src="video-sevgili.mp4" type="video/mp4">
+</div>
+<!-- Sevgili Formu -->
+<div class="form-section" id="loverForm">
+<h2>Nümunə Mahnı</h2>
+<video controls="" style="border-radius: 10px;" width="100%">
+<source src="video-sevgili.mp4" type="video/mp4"/>
       Sizin brauzer video dəstəkləmir.
     </video>
-    
 <form id="loverFormInputs">
-  <label>1️⃣ Sevgilinizin və sizin adınız</label>
-  <input type="text" name="lover1">
-
-  <label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
-  <textarea name="lover2" rows="3"></textarea>
-
-  <label>3️⃣ Sevgilinizin xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
-  <textarea name="lover3" rows="2"></textarea>
-
-  <label>4️⃣ Xüsusi xatirələriniz varmı?</label>
-  <textarea name="lover4" rows="2"></textarea>
-
-  <label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
-  <textarea name="lover5" rows="2"></textarea>
-
-  <label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-  <input type="text" name="lover6">
-
-  <label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
-  <textarea name="lover7" rows="2"></textarea>
-
-  <label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
-  <input type="text" name="lover8">
-
-  <label>9️⃣ WhatsApp nömrəniz:</label>
-  <input type="text" name="lover9">
-
-  <button type="button" onclick="sendWhatsApp('loverFormInputs')">Təsdiqlə və Göndər</button>
+<label>1️⃣ Sevgilinizin və sizin adınız</label>
+<input name="lover1" type="text"/>
+<label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
+<textarea name="lover2" rows="3"></textarea>
+<label>3️⃣ Sevgilinizin xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
+<textarea name="lover3" rows="2"></textarea>
+<label>4️⃣ Xüsusi xatirələriniz varmı?</label>
+<textarea name="lover4" rows="2"></textarea>
+<label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
+<textarea name="lover5" rows="2"></textarea>
+<label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
+<input name="lover6" type="text"/>
+<label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
+<textarea name="lover7" rows="2"></textarea>
+<label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
+<input name="lover8" type="text"/>
+<label>9️⃣ WhatsApp nömrəniz:</label>
+<input name="lover9" type="text"/>
+<button onclick="sendWhatsApp('loverFormInputs')" type="button">Təsdiqlə və Göndər</button>
 </form>
-
-  </div>
-
-  <!-- Ana/Ata Formu -->
-  <div id="fatherForm" class="form-section">
-    <h2>Nümunə Mahnı</h2>
-    <video controls width="100%" style="border-radius: 10px;">
-      <source src="video-valideyn.mp4" type="video/mp4">
+</div>
+<!-- Ana/Ata Formu -->
+<div class="form-section" id="fatherForm">
+<h2>Nümunə Mahnı</h2>
+<video controls="" style="border-radius: 10px;" width="100%">
+<source src="video-valideyn.mp4" type="video/mp4"/>
       Sizin brauzer video dəstəkləmir.
     </video>
-    
 <form id="fatherFormInputs">
-  <label>1️⃣ Atanızın/ Ananızın adı</label>
-  <input type="text" name="father1">
-
-  <label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
-  <textarea name="father2" rows="3"></textarea>
-
-  <label>3️⃣ Ananızın xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
-  <textarea name="father3" rows="2"></textarea>
-
-  <label>4️⃣ Xüsusi xatirələriniz varmı?</label>
-  <textarea name="father4" rows="2"></textarea>
-
-  <label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
-  <textarea name="father5" rows="2"></textarea>
-
-  <label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
-  <input type="text" name="father6">
-
-  <label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
-  <textarea name="father7" rows="2"></textarea>
-
-  <label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
-  <input type="text" name="father8">
-
-  <label>9️⃣ WhatsApp nömrəniz:</label>
-  <input type="text" name="father9">
-
-  <button type="button" onclick="sendWhatsApp('fatherFormInputs')">Təsdiqlə və Göndər</button>
+<label>1️⃣ Atanızın/ Ananızın adı</label>
+<input name="father1" type="text"/>
+<label>2️⃣ Hansı mövzuya diqqət yetirmək istəyirsiniz?</label>
+<textarea name="father2" rows="3"></textarea>
+<label>3️⃣ Ananızın xarakterini və sizə təsirini necə təsvir edərsiniz?</label>
+<textarea name="father3" rows="2"></textarea>
+<label>4️⃣ Xüsusi xatirələriniz varmı?</label>
+<textarea name="father4" rows="2"></textarea>
+<label>5️⃣ Mahnıda tam olaraq nəyi ifadə etmək istəyirsiniz?</label>
+<textarea name="father5" rows="2"></textarea>
+<label>6️⃣ Mahnı xanım yoxsa bəy tərəfindən səsləndirilsin?</label>
+<input name="father6" type="text"/>
+<label>7️⃣ Mahnıda istifadə olunsun dediyiniz sözlər, ifadələr varmı?</label>
+<textarea name="father7" rows="2"></textarea>
+<label>8️⃣ Şəkli necə göndərəcəksiniz?</label>
+<input name="father8" type="text"/>
+<label>9️⃣ WhatsApp nömrəniz:</label>
+<input name="father9" type="text"/>
+<button onclick="sendWhatsApp('fatherFormInputs')" type="button">Təsdiqlə və Göndər</button>
 </form>
-
-  </div>
-
-  <!-- Script hissəsi -->
-  
+</div>
+<!-- Script hissəsi -->
 <script>
   function showForm(id) {
     const sections = document.querySelectorAll('.form-section');
@@ -373,9 +330,6 @@
   }
 
 </script>
-
-
-
 <script>
   function showNotificationWithCountdown(text, seconds, callback) {
     const notif = document.createElement("div");
@@ -499,6 +453,11 @@
       });
   });
 </script>
-
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+</script>
 </body>
 </html>
