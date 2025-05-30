@@ -1,11 +1,10 @@
 
 <!DOCTYPE html>
-
 <html lang="az">
 <head>
-<meta charset="utf-8"/>
-<title>Admin Panel - Qiymətlər</title>
-<style>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Qiymətlər</title>
+  <style>
     body { background-color: #4A148C; color: white; font-family: sans-serif; padding: 20px; }
     .card { background: #6A1B9A; padding: 15px; margin: 10px 0; border-radius: 8px; position: relative; }
     input { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: none; }
@@ -15,20 +14,20 @@
     .remove-btn { position: absolute; top: 10px; right: 10px; background: #E53935; }
     .remove-btn:hover { background: #B71C1C; }
   </style>
-<script>
-  if (localStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "login.html";
-  }
-</script></head>
+</head>
 <body>
+
 <h1>💰 Qiymətləri Redaktə Et</h1>
 <div id="price-container"></div>
+
 <h3>⏳ Geri Sayım Bitmə Tarixi:</h3>
-<input id="endTime" type="datetime-local"/>
-<br/><br/>
+<input type="datetime-local" id="endTime">
+
+<br><br>
 <button onclick="addItem()">+ Yeni Bənd Əlavə Et</button>
 <button onclick="saveChanges()">Yadda saxla</button>
 <div id="message"></div>
+
 <script>
 let data = { items: [], endTime: "" };
 
@@ -80,10 +79,5 @@ function saveChanges() {
   .catch(() => alert("Xəta baş verdi!"));
 }
 </script>
-<div style="text-align: center; margin-top: 30px;"><button onclick="logout()" style="background:#E53935; color:white; padding:10px 20px; border:none; border-radius:5px;">Çıxış</button></div><script>
-  function logout() {
-    localStorage.removeItem("isLoggedIn");
-    window.location.href = "login.html";
-  }
-</script></body>
+</body>
 </html>

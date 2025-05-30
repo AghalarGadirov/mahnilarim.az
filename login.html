@@ -1,81 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Giriş</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚙️ Admin Panel Ana Səhifə</title>
   <style>
     body {
       background-color: #4A148C;
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    }
-    .login-box h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #6A1B9A;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #6A1B9A;
-      border: none;
       color: white;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .error {
-      color: red;
+      font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 10px;
+      padding: 50px;
+    }
+    h1 {
+      margin-bottom: 40px;
+    }
+    .link-btn {
+      display: inline-block;
+      background-color: #7B1FA2;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s;
+    }
+    .link-btn:hover {
+      background-color: #AB47BC;
     }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>Admin Girişi</h2>
-    <input type="text" id="username" placeholder="İstifadəçi adı" />
-    <input type="password" id="password" placeholder="Şifrə" />
-    <button onclick="login()">Daxil ol</button>
-    <div id="error" class="error"></div>
-  </div>
-
-  <script>
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-
-      if (user === "aga.gadirov" && pass === "fuadyaxsioglandi02") {
-        localStorage.setItem("adminAccess", "true");
-        window.location.href = "admin_index.html";
-      } else {
-        document.getElementById("error").innerText = "İstifadəçi adı və ya şifrə yalnışdır!";
-      }
-    }
-
-    if (localStorage.getItem("adminAccess") === "true") {
-      window.location.href = "admin_index.html";
-    }
-  </script>
+  <h1>⚙️ Admin Panel</h1>
+  <a href="admin_elaqe_redakte.html" class="link-btn">📞 Əlaqə Bölməsi</a><br>
+  <a href="admin_qiymet_redakte.html" class="link-btn">💰 Qiymət Siyahısı</a><br>
+  <a href="admin_formlar_per_song.html" class="link-btn">📝 Formlar və Mahnılar</a>
 </body>
 </html>
