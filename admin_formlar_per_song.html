@@ -180,7 +180,7 @@
 
   function saveChanges() {
     const whatsapp = document.getElementById("whatsappInput").value;
-    fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp", {
+    fetch("https://mahnisifarisim-az.onrender.com/api/formlar", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ whatsapp })
@@ -203,7 +203,7 @@
       renderForms();
     });
 
-  fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
+  fetch("https://mahnisifarisim-az.onrender.com/api/formlar")
     .then(res => res.json())
     .then(data => {
       document.getElementById("whatsappInput").value = data.whatsapp || "";
