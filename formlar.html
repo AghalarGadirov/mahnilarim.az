@@ -109,7 +109,7 @@
 <!-- Uşaq Formu -->
 <div class="form-section" id="childForm">
 <h2>Nümunə Mahnı</h2>
-<video controls="" style="border-radius: 10px;" width="100%">
+<video controls="" style="border-radius: 10px;height:200px" width="100%">
 <source src="video-usaq.mp4" type="video/mp4"/>
       Sizin brauzer video dəstəkləmir.
     </video>
@@ -138,7 +138,7 @@
 <!-- Sevgili Formu -->
 <div class="form-section" id="loverForm">
 <h2>Nümunə Mahnı</h2>
-<video controls="" style="border-radius: 10px;" width="100%">
+<video controls="" style="border-radius: 10px;height:200px" width="100%">
 <source src="video-sevgili.mp4" type="video/mp4"/>
       Sizin brauzer video dəstəkləmir.
     </video>
@@ -167,7 +167,7 @@
 <!-- Ana/Ata Formu -->
 <div class="form-section" id="fatherForm">
 <h2>Nümunə Mahnı</h2>
-<video controls="" style="border-radius: 10px;" width="100%">
+<video controls="" style="border-radius: 10px;height:200px" width="100%">
 <source src="video-valideyn.mp4" type="video/mp4"/>
       Sizin brauzer video dəstəkləmir.
     </video>
@@ -251,36 +251,12 @@
           section.id = id;
 
           let video;
-          
-          
-if (form.type === "instagram" && form.video && form.video.includes("instagram.com")) {
-  const instaContainer = document.createElement("div");
-  instaContainer.innerHTML = `
-    <blockquote class="instagram-media"
-      data-instgrm-permalink="${form.video}"
-      data-instgrm-version="14"
-      style="width:100%;margin:auto;border-radius:10px;">
-    </blockquote>
-  `;
-  section.appendChild(instaContainer);
-
-  const instaScript = document.createElement('script');
-  instaScript.setAttribute('src', 'https://www.instagram.com/embed.js');
-  instaScript.setAttribute('async', '');
-  document.body.appendChild(instaScript);
-} else {
-} else {
-            const video = document.createElement("video");
-            video.controls = true;
-            video.style.borderRadius = "10px";
-            video.style.width = "100%";
-            const source = document.createElement("source");
-            source.src = form.video;
-            source.type = "video/mp4";
-            video.appendChild(source);
-            card.appendChild(video);
-          }
-        idth:100%;margin:auto;border-radius:10px;";
+          if (form.type === "instagram") {
+            video = document.createElement("blockquote");
+            video.className = "instagram-media";
+            video.setAttribute("data-instgrm-permalink", form.video);
+            video.setAttribute("data-instgrm-version", "14");
+            video.style = "width:100%;margin:auto;border-radius:10px;";
           } else {
             video = document.createElement("video");
             video.controls = true;
@@ -446,25 +422,15 @@ if (form.type === "instagram" && form.video && form.video.includes("instagram.co
           section.className = "form-section";
           section.id = id;
 
-          
-          let video;
-          if (form.type === "instagram") {
-            video = document.createElement("blockquote");
-            video.className = "instagram-media";
-            video.setAttribute("data-instgrm-permalink", form.video);
-            video.setAttribute("data-instgrm-version", "14");
-            video.style = "width:100%;margin:auto;border-radius:10px;";
-            if (window.instgrm) window.instgrm.Embeds.process();
-          } else {
-            video = document.createElement("video");
-            video.controls = true;
-            video.style.borderRadius = "10px";
-            video.style.width = "100%";
-            const source = document.createElement("source");
-            source.src = form.video;
-            source.type = "video/mp4";
-            video.appendChild(source);
-          }
+          const video = document.createElement("video");
+          video.controls = true;
+          video.style.borderRadius = "10px";
+          video.style.width = "100%";
+
+          const source = document.createElement("source");
+          source.src = form.video;
+          source.type = "video/mp4";
+          video.appendChild(source);
 
           const formTitle = document.createElement("h2");
           formTitle.textContent = "Nümunə Mahnı";
