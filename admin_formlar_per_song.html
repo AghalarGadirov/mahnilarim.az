@@ -1,215 +1,213 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="utf-8"/>
 <title>📝 Formlar və Mahnılar Paneli</title>
 <style>
-    body {
-      background-color: #6A1B9A;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      text-align: center;
-    }
-    h1 { margin-bottom: 20px; }
-    .section {
-      background-color: #9932CC;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 10px;
-      max-width: 750px;
-      text-align: left;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: none;
-      font-size: 1em;
-    }
-    .remove-btn {
-      background-color: #e53935;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 6px 10px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    .remove-btn:hover { background-color: #c62828; }
-    .add-btn, .save-btn {
-      background-color: #BA55D3;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 1em;
-      margin: 10px;
-    }
-    .save-btn:hover, .add-btn:hover { background-color: #9b3bb8; }
-  </style>
+  body {
+    background-color: #6A1B9A;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    text-align: center;
+  }
+  h1 { margin-bottom: 20px; }
+  .section {
+    background-color: #9932CC;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 750px;
+    text-align: left;
+  }
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+  }
+  input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+  }
+  .remove-btn {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .remove-btn:hover { background-color: #c62828; }
+  .add-btn, .save-btn {
+    background-color: #BA55D3;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    margin: 10px;
+  }
+  .save-btn:hover, .add-btn:hover { background-color: #9b3bb8; }
+</style>
 </head>
 <body>
 <h1>📝 Formlar və Mahnılar Paneli</h1>
 <div id="formContainer"></div>
 <button class="add-btn" onclick="addForm()">+ Yeni Form Əlavə Et</button>
-<div class="section"><label>📱 WhatsApp Nömrəsi:</label><input id="whatsappInput" type="text"/></div><button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
+<div class="section">
+  <label>📱 WhatsApp Nömrəsi:</label>
+  <input id="whatsappInput" type="text"/>
+</div>
+<button class="save-btn" onclick="saveChanges()">💾 Yadda Saxla</button>
+
 <script>
-    let forms = [];
+  let forms = [];
 
-    function createFormElement(form, formIndex) {
-      const formDiv = document.createElement("div");
-      formDiv.className = "section";
+  function createFormElement(form, formIndex) {
+    const formDiv = document.createElement("div");
+    formDiv.className = "section";
 
-      const titleLabel = document.createElement("label");
-      titleLabel.innerText = "Form Başlığı:";
-      formDiv.appendChild(titleLabel);
+    const titleLabel = document.createElement("label");
+    titleLabel.innerText = "Form Başlığı:";
+    formDiv.appendChild(titleLabel);
 
-      const titleInput = document.createElement("input");
-      titleInput.value = form.title;
-      titleInput.onchange = () => forms[formIndex].title = titleInput.value;
-      formDiv.appendChild(titleInput);
+    const titleInput = document.createElement("input");
+    titleInput.value = form.title;
+    titleInput.onchange = () => forms[formIndex].title = titleInput.value;
+    formDiv.appendChild(titleInput);
 
-      form.questions.forEach((q, qIndex) => {
-        const questionLabel = document.createElement("label");
-        questionLabel.innerText = `Sual ${qIndex + 1}:`;
-        formDiv.appendChild(questionLabel);
+    form.questions.forEach((q, qIndex) => {
+      const questionLabel = document.createElement("label");
+      questionLabel.innerText = `Sual ${qIndex + 1}:`;
+      formDiv.appendChild(questionLabel);
 
-        const questionInput = document.createElement("input");
-        questionInput.value = q;
-        questionInput.onchange = () => forms[formIndex].questions[qIndex] = questionInput.value;
-        formDiv.appendChild(questionInput);
+      const questionInput = document.createElement("input");
+      questionInput.value = q;
+      questionInput.onchange = () => forms[formIndex].questions[qIndex] = questionInput.value;
+      formDiv.appendChild(questionInput);
 
-        const removeQBtn = document.createElement("button");
-        removeQBtn.innerText = "❌ Sualı Sil";
-        removeQBtn.className = "remove-btn";
-        removeQBtn.onclick = () => {
-          forms[formIndex].questions.splice(qIndex, 1);
-          renderForms();
-        };
-        formDiv.appendChild(removeQBtn);
-      });
-
-      const addQBtn = document.createElement("button");
-      addQBtn.innerText = "+ Sual Əlavə Et";
-      addQBtn.className = "add-btn";
-      addQBtn.onclick = () => {
-        forms[formIndex].questions.push("");
+      const removeQBtn = document.createElement("button");
+      removeQBtn.innerText = "❌ Sualı Sil";
+      removeQBtn.className = "remove-btn";
+      removeQBtn.onclick = () => {
+        forms[formIndex].questions.splice(qIndex, 1);
         renderForms();
       };
-      formDiv.appendChild(addQBtn);
+      formDiv.appendChild(removeQBtn);
+    });
 
-      const videoLabel = document.createElement("label");
-      videoLabel.innerText = "🎥 Video fayl:";
-      formDiv.appendChild(videoLabel);
+    const addQBtn = document.createElement("button");
+    addQBtn.innerText = "+ Sual Əlavə Et";
+    addQBtn.className = "add-btn";
+    addQBtn.onclick = () => {
+      forms[formIndex].questions.push("");
+      renderForms();
+    };
+    formDiv.appendChild(addQBtn);
 
+    const videoLabel = document.createElement("label");
+    videoLabel.innerText = "🎥 Videolar:";
+    formDiv.appendChild(videoLabel);
+
+    if (!Array.isArray(form.videos)) form.videos = [];
+    form.videos.forEach((video, vIndex) => {
       const videoInput = document.createElement("input");
-
-      const typeLabel = document.createElement("label");
-      typeLabel.innerText = "🎞 Video Tipi:";
-      formDiv.appendChild(typeLabel);
-
-      const typeSelect = document.createElement("select");
-      typeSelect.innerHTML = '<option value="video">Video (MP4)</option><option value="instagram">Instagram</option>';
-      typeSelect.value = form.type || "video";
-      typeSelect.onchange = () => forms[formIndex].type = typeSelect.value;
-      formDiv.appendChild(typeSelect);
-    
-      videoInput.value = form.video || "";
-      videoInput.onchange = () => forms[formIndex].video = videoInput.value;
+      videoInput.value = video;
+      videoInput.onchange = () => forms[formIndex].videos[vIndex] = videoInput.value;
       formDiv.appendChild(videoInput);
 
-videoInput.type = "file";
-videoInput.accept = "video/mp4";
-videoInput.onchange = () => {
-  const file = videoInput.files[0];
-  if (file) {
-    const formData = new FormData();
-    formData.append("video", file);
-    fetch("https://mahnisifarisim-az.onrender.com/api/upload", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-      forms[formIndex].video = data.filename;
-    })
-    .catch(() => alert("Video yüklənmədi!"));
-  }
-};
-
-
-      const removeFormBtn = document.createElement("button");
-      removeFormBtn.innerText = "🗑️ Formu Sil";
-      removeFormBtn.className = "remove-btn";
-      removeFormBtn.onclick = () => {
-        forms.splice(formIndex, 1);
+      const removeVideoBtn = document.createElement("button");
+      removeVideoBtn.innerText = "❌ Videonu Sil";
+      removeVideoBtn.className = "remove-btn";
+      removeVideoBtn.onclick = () => {
+        forms[formIndex].videos.splice(vIndex, 1);
         renderForms();
       };
-      formDiv.appendChild(removeFormBtn);
+      formDiv.appendChild(removeVideoBtn);
+    });
 
-      return formDiv;
-    }
-
-    function renderForms() {
-      const container = document.getElementById("formContainer");
-      container.innerHTML = "";
-      forms.forEach((form, i) => {
-        const formElement = createFormElement(form, i);
-        container.appendChild(formElement);
-      });
-    }
-
-    function addForm() {
-      forms.push({ title: "Yeni Form", questions: [], video: "" });
+    const addVideoBtn = document.createElement("button");
+    addVideoBtn.innerText = "+ Video Əlavə Et";
+    addVideoBtn.className = "add-btn";
+    addVideoBtn.onclick = () => {
+      forms[formIndex].videos.push("");
       renderForms();
-    }
-
-    function saveChanges() {
-      fetch("https://mahnisifarisim-az.onrender.com/api/formlar", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ forms })
-      })
-      .then(res => res.json())
-      .then(res => alert(res.message || "Dəyişikliklər yadda saxlandı!"))
-      .catch(() => alert("Xəta baş verdi!"));
-    }
-
-    fetch("https://mahnisifarisim-az.onrender.com/api/formlar")
-      .then(res => res.json())
-      .then(data => {
-        forms = data.forms;
-        renderForms();
-      });
-  
-    // WhatsApp nömrəsini yüklə
-    fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("whatsappInput").value = data.whatsapp || "";
-      });
-
-    // Yadda saxla funksiyasına nömrə əlavə et
-    const originalSave = saveChanges;
-    saveChanges = function() {
-      const whatsapp = document.getElementById("whatsappInput").value;
-      fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ whatsapp })
-      }).then(res => res.json()).then(console.log);
-
-      originalSave();
     };
+    formDiv.appendChild(addVideoBtn);
+
+    const typeLabel = document.createElement("label");
+    typeLabel.innerText = "🎞 Video Tipi:";
+    formDiv.appendChild(typeLabel);
+
+    const typeSelect = document.createElement("select");
+    typeSelect.innerHTML = '<option value="video">Video (MP4)</option><option value="instagram">Instagram</option>';
+    typeSelect.value = form.type || "video";
+    typeSelect.onchange = () => forms[formIndex].type = typeSelect.value;
+    formDiv.appendChild(typeSelect);
+
+    const removeFormBtn = document.createElement("button");
+    removeFormBtn.innerText = "🗑️ Formu Sil";
+    removeFormBtn.className = "remove-btn";
+    removeFormBtn.onclick = () => {
+      forms.splice(formIndex, 1);
+      renderForms();
+    };
+    formDiv.appendChild(removeFormBtn);
+
+    return formDiv;
+  }
+
+  function renderForms() {
+    const container = document.getElementById("formContainer");
+    container.innerHTML = "";
+    forms.forEach((form, i) => {
+      const formElement = createFormElement(form, i);
+      container.appendChild(formElement);
+    });
+  }
+
+  function addForm() {
+    forms.push({ title: "Yeni Form", questions: [], videos: [], type: "video" });
+    renderForms();
+  }
+
+  function saveChanges() {
+    const whatsapp = document.getElementById("whatsappInput").value;
+    fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ whatsapp })
+    }).then(res => res.json()).then(console.log);
+
+    fetch("https://mahnisifarisim-az.onrender.com/api/formlar", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ forms })
+    })
+    .then(res => res.json())
+    .then(res => alert(res.message || "Dəyişikliklər yadda saxlandı!"))
+    .catch(() => alert("Xəta baş verdi!"));
+  }
+
+  fetch("https://mahnisifarisim-az.onrender.com/api/formlar")
+    .then(res => res.json())
+    .then(data => {
+      forms = data.forms.map(f => ({ ...f, videos: f.videos || (f.video ? [f.video] : []) }));
+      renderForms();
+    });
+
+  fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("whatsappInput").value = data.whatsapp || "";
+    });
 </script>
 </body>
 </html>
