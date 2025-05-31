@@ -112,6 +112,25 @@
       formDiv.appendChild(videoLabel);
 
       const videoInput = document.createElement("input");
+videoInput.type = "file";
+videoInput.accept = "video/mp4";
+videoInput.onchange = () => {
+  const file = videoInput.files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append("video", file);
+  fetch("https://mahnisifarisim-az.onrender.com/api/upload", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.filename) {
+      forms[formIndex].video = "/uploads/" + data.filename;
+    }
+  })
+  .catch(err => console.error("Upload failed", err));
+};
 
       const typeLabel = document.createElement("label");
       typeLabel.innerText = "🎞 Video Tipi:";
