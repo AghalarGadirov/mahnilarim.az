@@ -109,7 +109,7 @@
 <!-- Uşaq Formu -->
 <div class="form-section" id="childForm">
 <h2>Nümunə Mahnı</h2>
-<video controls="" style="border-radius: 10px;height:200px" width="100%">
+<video controls="" style="border-radius: 10px;height:50px" width="50%">
 <source src="video-usaq.mp4" type="video/mp4"/>
       Sizin brauzer video dəstəkləmir.
     </video>
@@ -194,302 +194,141 @@
 </form>
 </div>
 <!-- Script hissəsi -->
-<script>
-  function showForm(id) {
-    const sections = document.querySelectorAll('.form-section');
-    sections.forEach(s => s.style.display = 'none');
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'block';
-  }
-
-  
-  function sendWhatsApp(formId, title) {
-    const form = document.getElementById(formId);
-    const inputs = form.querySelectorAll("input, textarea");
-    let message = `📝 ${title}
-`;
-    inputs.forEach((input, index) => {
-      const val = input.value.trim();
-      if (val) message += `${index + 1}️⃣ ${val}
-`;
-    });
-    const phone = whatsappNumber;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
-      window.location.href = url;
-    });
-  }
-
-`;
-    inputs.forEach((input, index) => {
-      const val = input.value.trim();
-      if (val) message += `${index + 1}️⃣ ${val}
-`;
-    });
-    const phone = whatsappNumber;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.location.href = url;
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    fetch("https://mahnisifarisim-az.onrender.com/api/formlar?t=" + Date.now())
-      .then(res => res.json())
-      .then(data => {
-        const buttonsDiv = document.querySelector("h1").nextElementSibling;
-        const formsRoot = document.querySelector("h1").parentElement;
-
-        data.forms.forEach((form, index) => {
-          const id = `form${index}`;
-
-          const btn = document.createElement("button");
-          btn.innerText = form.title;
-          btn.onclick = () => showForm(id);
-          buttonsDiv.insertAdjacentElement("afterend", btn);
-
-          const section = document.createElement("div");
-          section.className = "form-section";
-          section.id = id;
-
-          const formTitle = document.createElement("h2");
-formTitle.textContent = "Nümunə Mahnı";
-section.appendChild(formTitle);
-
-if (Array.isArray(form.videos)) {
-  form.videos.forEach(videoUrl => {
-    if (form.type === "instagram") {
-      const instaBlock = document.createElement("blockquote");
-      instaBlock.className = "instagram-media";
-      instaBlock.setAttribute("data-instgrm-permalink", videoUrl);
-      instaBlock.setAttribute("data-instgrm-version", "14");
-      instaBlock.style = "width:100%;margin:auto;border-radius:10px;";
-      section.appendChild(instaBlock);
-    } else {
-      const video = document.createElement("video");
-      video.controls = true;
-      video.style.borderRadius = "10px";
-      video.style.width = "100%";
-      video.style.height = "200px";
-      video.style.marginBottom = "10px";
-
-      const source = document.createElement("source");
-      source.src = videoUrl;
-      source.type = "video/mp4";
-      video.appendChild(source);
-
-      section.appendChild(video);
-    }
-  });
-}
 
 
-          const formTitle = document.createElement("h2");
-          formTitle.textContent = "Nümunə Mahnı";
 
-          const htmlForm = document.createElement("form");
-          htmlForm.id = `${id}Inputs`;
 
-          form.questions.forEach((q, i) => {
-            const label = document.createElement("label");
-            label.textContent = `${i + 1}️⃣ ${q}`;
-            const textarea = document.createElement("textarea");
-            textarea.rows = 2;
-            htmlForm.appendChild(label);
-            htmlForm.appendChild(textarea);
-          });
-
-          const submitBtn = document.createElement("button");
-          submitBtn.type = "button";
-          submitBtn.textContent = "Təsdiqlə və Göndər";
-          submitBtn.onclick = () => sendWhatsApp(htmlForm.id, form.title);
-          htmlForm.appendChild(submitBtn);
-
-          section.appendChild(formTitle);
-          section.appendChild(video);
-          section.appendChild(htmlForm);
-          formsRoot.appendChild(section);
-        });
-      });
-  });
-
-  function showNotificationWithCountdown(text, seconds, callback) {
-    const notif = document.createElement("div");
-    notif.style.position = "fixed";
-    notif.style.top = "20px";
-    notif.style.left = "50%";
-    notif.style.transform = "translateX(-50%)";
-    notif.style.backgroundColor = "#4CAF50";
-    notif.style.color = "white";
-    notif.style.padding = "15px 25px";
-    notif.style.borderRadius = "10px";
-    notif.style.fontSize = "16px";
-    notif.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-    notif.style.zIndex = "9999";
-    notif.style.textAlign = "center";
-    notif.style.maxWidth = "90%";
-    notif.style.wordWrap = "break-word";
-
-    const countdownSpan = document.createElement("span");
-    countdownSpan.style.fontWeight = "bold";
-    countdownSpan.style.marginLeft = "10px";
-    notif.innerText = text + " ";
-    notif.appendChild(countdownSpan);
-
-    document.body.appendChild(notif);
-
-    let current = seconds;
-    countdownSpan.innerText = `⏳ ${current}`;
-
-    const interval = setInterval(() => {
-      current--;
-      if (current > 0) {
-        countdownSpan.innerText = `⏳ ${current}`;
-      } else {
-        clearInterval(interval);
-        notif.remove();
-        callback();
-      }
-    }, 1000);
-  }
-
-</script>
-<script>
-  function showNotificationWithCountdown(text, seconds, callback) {
-    const notif = document.createElement("div");
-    notif.style.position = "fixed";
-    notif.style.top = "20px";
-    notif.style.left = "50%";
-    notif.style.transform = "translateX(-50%)";
-    notif.style.backgroundColor = "#4CAF50";
-    notif.style.color = "white";
-    notif.style.padding = "15px 25px";
-    notif.style.borderRadius = "10px";
-    notif.style.fontSize = "16px";
-    notif.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-    notif.style.zIndex = "9999";
-    notif.style.textAlign = "center";
-    notif.style.maxWidth = "90%";
-    notif.style.wordWrap = "break-word";
-
-    const countdownSpan = document.createElement("span");
-    countdownSpan.style.fontWeight = "bold";
-    countdownSpan.style.marginLeft = "10px";
-    notif.innerText = text + " ";
-    notif.appendChild(countdownSpan);
-
-    document.body.appendChild(notif);
-
-    let current = seconds;
-    countdownSpan.innerText = `⏳ ${current}`;
-
-    const interval = setInterval(() => {
-      current--;
-      if (current > 0) {
-        countdownSpan.innerText = `⏳ ${current}`;
-      } else {
-        clearInterval(interval);
-        notif.remove();
-        callback();
-      }
-    }, 1000);
-  }
-
-  function sendWhatsApp(formId, title) {
-    const form = document.getElementById(formId);
-    const inputs = form.querySelectorAll("input, textarea");
-    let message = `📝 ${title}
-`;
-    inputs.forEach((input, index) => {
-      const val = input.value.trim();
-      if (val) message += `${index + 1}️⃣ ${val}
-`;
-    });
-    const phone = whatsappNumber;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
-      window.location.href = url;
-    });
-  }
-
-  function showForm(id) {
-    const sections = document.querySelectorAll('.form-section');
-    sections.forEach(s => s.style.display = 'none');
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'block';
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    fetch("https://mahnisifarisim-az.onrender.com/api/formlar?t=" + Date.now())
-      .then(res => res.json())
-      .then(data => {
-        const buttonsDiv = document.querySelector("h1").nextElementSibling;
-        const formsRoot = document.querySelector("h1").parentElement;
-
-        data.forms.forEach((form, index) => {
-          const id = `form${index}`;
-
-          const btn = document.createElement("button");
-          btn.innerText = form.title;
-          btn.onclick = () => showForm(id);
-          buttonsDiv.insertAdjacentElement("afterend", btn);
-
-          const section = document.createElement("div");
-          section.className = "form-section";
-          section.id = id;
-
-          const video = document.createElement("video");
-          video.controls = true;
-          video.style.borderRadius = "10px";
-          video.style.width = "100%";
-
-          const source = document.createElement("source");
-          source.src = form.video;
-          source.type = "video/mp4";
-          video.appendChild(source);
-
-          const formTitle = document.createElement("h2");
-          formTitle.textContent = "Nümunə Mahnı";
-
-          const htmlForm = document.createElement("form");
-          htmlForm.id = `${id}Inputs`;
-
-          form.questions.forEach((q, i) => {
-            const label = document.createElement("label");
-            label.textContent = `${i + 1}️⃣ ${q}`;
-            const textarea = document.createElement("textarea");
-            textarea.rows = 2;
-            htmlForm.appendChild(label);
-            htmlForm.appendChild(textarea);
-          });
-
-          const submitBtn = document.createElement("button");
-          submitBtn.type = "button";
-          submitBtn.textContent = "Təsdiqlə və Göndər";
-          submitBtn.onclick = () => sendWhatsApp(htmlForm.id, form.title);
-          htmlForm.appendChild(submitBtn);
-
-          section.appendChild(formTitle);
-          section.appendChild(video);
-          section.appendChild(htmlForm);
-          formsRoot.appendChild(section);
-        });
-      });
-  });
-</script>
 <script>
 let whatsappNumber = "994507142403"; // Default, will be overwritten
 
-// WhatsApp nömrəsini serverdən yüklə
-fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
-  .then(res => res.json())
-  .then(data => {
-    if (data.whatsapp) whatsappNumber = data.whatsapp;
+function showNotificationWithCountdown(text, seconds, callback) {
+  const notif = document.createElement("div");
+  notif.style.position = "fixed";
+  notif.style.top = "20px";
+  notif.style.left = "50%";
+  notif.style.transform = "translateX(-50%)";
+  notif.style.backgroundColor = "#4CAF50";
+  notif.style.color = "white";
+  notif.style.padding = "15px 25px";
+  notif.style.borderRadius = "10px";
+  notif.style.fontSize = "16px";
+  notif.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
+  notif.style.zIndex = "9999";
+  notif.style.textAlign = "center";
+  notif.style.maxWidth = "90%";
+  notif.style.wordWrap = "break-word";
+  const countdownSpan = document.createElement("span");
+  countdownSpan.style.fontWeight = "bold";
+  countdownSpan.style.marginLeft = "10px";
+  notif.innerText = text + " ";
+  notif.appendChild(countdownSpan);
+  document.body.appendChild(notif);
+  let current = seconds;
+  countdownSpan.innerText = `⏳ ${current}`;
+  const interval = setInterval(() => {
+    current--;
+    if (current > 0) {
+      countdownSpan.innerText = `⏳ ${current}`;
+    } else {
+      clearInterval(interval);
+      notif.remove();
+      callback();
+    }
+  }, 1000);
+}
+
+function sendWhatsApp(formId, title) {
+  const form = document.getElementById(formId);
+  const inputs = form.querySelectorAll("input, textarea");
+  let message = `📝 ${title}
+`;
+  inputs.forEach((input, index) => {
+    const val = input.value.trim();
+    if (val) message += `${index + 1}️⃣ ${val}
+`;
   });
+  const phone = whatsappNumber;
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  showNotificationWithCountdown("Sizi WhatsApp-a yönləndiririk...", 3, () => {
+    window.location.href = url;
+  });
+}
 
+function showForm(id) {
+  const sections = document.querySelectorAll('.form-section');
+  sections.forEach(s => s.style.display = 'none');
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'block';
+}
 
-  function toggleMenu() {
-    const menu = document.getElementById("menu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
-  }
+window.addEventListener("DOMContentLoaded", () => {
+  fetch("https://mahnisifarisim-az.onrender.com/api/formlar?t=" + Date.now())
+    .then(res => res.json())
+    .then(data => {
+      const buttonsDiv = document.querySelector("h1").nextElementSibling;
+      const formsRoot = document.querySelector("h1").parentElement;
+      data.forms.forEach((form, index) => {
+        const id = `form${index}`;
+        const btn = document.createElement("button");
+        btn.innerText = form.title;
+        btn.onclick = () => showForm(id);
+        buttonsDiv.insertAdjacentElement("afterend", btn);
+        const section = document.createElement("div");
+        section.className = "form-section";
+        section.id = id;
+        const formTitle = document.createElement("h2");
+        formTitle.textContent = "Nümunə Mahnı";
+        section.appendChild(formTitle);
+
+        if (Array.isArray(form.videos)) {
+          form.videos.forEach(videoUrl => {
+            const video = document.createElement("video");
+            video.controls = true;
+            video.style.borderRadius = "10px";
+            video.style.width = "100%";
+            video.style.height = "200px";
+            video.style.marginBottom = "10px";
+            const source = document.createElement("source");
+            source.src = videoUrl;
+            source.type = "video/mp4";
+            video.appendChild(source);
+            section.appendChild(video);
+          });
+        }
+
+        const htmlForm = document.createElement("form");
+        htmlForm.id = `${id}Inputs`;
+        form.questions.forEach((q, i) => {
+          const label = document.createElement("label");
+          label.textContent = `${i + 1}️⃣ ${q}`;
+          const textarea = document.createElement("textarea");
+          textarea.rows = 2;
+          htmlForm.appendChild(label);
+          htmlForm.appendChild(textarea);
+        });
+        const submitBtn = document.createElement("button");
+        submitBtn.type = "button";
+        submitBtn.textContent = "Təsdiqlə və Göndər";
+        submitBtn.onclick = () => sendWhatsApp(htmlForm.id, form.title);
+        htmlForm.appendChild(submitBtn);
+        section.appendChild(htmlForm);
+        formsRoot.appendChild(section);
+      });
+    });
+
+  fetch("https://mahnisifarisim-az.onrender.com/api/whatsapp")
+    .then(res => res.json())
+    .then(data => {
+      if (data.whatsapp) whatsappNumber = data.whatsapp;
+    });
+});
+
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
 </script>
-<script async="True" src="//www.instagram.com/embed.js"></script></body>
+<script async src="//www.instagram.com/embed.js"></script>
+
+</body>
 </html>
