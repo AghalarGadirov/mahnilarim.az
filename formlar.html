@@ -250,23 +250,37 @@
           section.className = "form-section";
           section.id = id;
 
-          let video;
-          if (form.type === "instagram") {
-            video = document.createElement("blockquote");
-            video.className = "instagram-media";
-            video.setAttribute("data-instgrm-permalink", form.video);
-            video.setAttribute("data-instgrm-version", "14");
-            video.style = "width:100%;margin:auto;border-radius:10px;";
-          } else {
-            video = document.createElement("video");
-            video.controls = true;
-            video.style.borderRadius = "10px";
-            video.style.width = "100%";
-            const source = document.createElement("source");
-            source.src = form.video;
-            source.type = "video/mp4";
-            video.appendChild(source);
-          }
+          const formTitle = document.createElement("h2");
+formTitle.textContent = "Nümunə Mahnı";
+section.appendChild(formTitle);
+
+if (Array.isArray(form.videos)) {
+  form.videos.forEach(videoUrl => {
+    if (form.type === "instagram") {
+      const instaBlock = document.createElement("blockquote");
+      instaBlock.className = "instagram-media";
+      instaBlock.setAttribute("data-instgrm-permalink", videoUrl);
+      instaBlock.setAttribute("data-instgrm-version", "14");
+      instaBlock.style = "width:100%;margin:auto;border-radius:10px;";
+      section.appendChild(instaBlock);
+    } else {
+      const video = document.createElement("video");
+      video.controls = true;
+      video.style.borderRadius = "10px";
+      video.style.width = "100%";
+      video.style.height = "200px";
+      video.style.marginBottom = "10px";
+
+      const source = document.createElement("source");
+      source.src = videoUrl;
+      source.type = "video/mp4";
+      video.appendChild(source);
+
+      section.appendChild(video);
+    }
+  });
+}
+
 
           const formTitle = document.createElement("h2");
           formTitle.textContent = "Nümunə Mahnı";
